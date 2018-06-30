@@ -18,20 +18,20 @@ base = {
     'airport': 'pearson',
     'yonge': 'north york',
     'yorkdale': 'toronto',
-    'sheppard': 'north york',
+    'sheppard': 'northyork',
     'university': 'waterloo',
     'pmall': 'scarborough',
     'gta': 'toronto',
     'markville': 'markham',
     'fmp': 'markham',
     'mcmaster': 'hamilton',
-    'downsview': 'north york',
+    'downsview': 'northyork',
     'islington': 'etobicoke',
     'trt': 'toronto',
     'wlu': 'waterloo',
     'laurier': 'waterloo',
     'burger king': 'waterloo',
-    'rhill': 'richmond hill',
+    'rhill': 'richmondhill',
 }
 
 t = StringTrie(separator=' ')

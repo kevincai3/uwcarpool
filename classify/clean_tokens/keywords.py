@@ -8,7 +8,7 @@ locations = set([
     'scarborough',
     'brampton',
     'markham',
-    'north york',
+    'northyork',
     'london',
     'ottawa',
     'vaughan',
@@ -20,4 +20,5 @@ locations = set([
     'newmarket',
     'thornhill',
     'bayview',
+    'richmondhill',
 ])
