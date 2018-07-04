@@ -1,0 +1,40 @@
+@import '../variables.css';
+
+.select_container {
+  border: 1px solid var(--color-ocean-blue);
+  margin-left: 10px;
+  top: -10px;
+  position: relative;
+}
+
+.select_element {
+  padding: 10px 3px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.select_element:hover {
+  background-color: var(--color-medium-blue);
+}
+
+.selected {
+  background-color: var(--color-white-blue);
+}
+
+.button {
+  border: 1px solid var(--color-ocean-blue);
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.button_selected {
+  border-bottom: none;
+}
+
+.container {
+  display: inline-block;
+  font-weight: 600;
+  font-size: .875rem;
+}

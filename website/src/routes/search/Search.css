@@ -1,0 +1,16 @@
+@import '../../components/variables.css';
+
+.container {
+  padding: 30px 0px 30px 90px;
+}
+
+.searchbar {
+  height: 2.5rem;
+}
+
+.button {
+  background-color: var(--color-ocean-blue);
+  color: var(--color-white-blue);
+  min-height: 2.5rem;
+  border: unset;
+}
