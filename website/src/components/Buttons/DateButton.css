@@ -1,0 +1,13 @@
+.container {
+  border: 1px solid var(--color-ocean-blue);
+  display: flex;
+  flex-direction: column;
+}
+
+.all_dates_button {
+  margin: 0px;
+  border: none;
+  padding: 0.5rem 0rem !important;
+  font-weight: 400 !important;
+  z-index: 2;
+}

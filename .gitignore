@@ -11,3 +11,6 @@ __pycache__
 
 /build
 __snapshots__
+
+src/config.js
+config.py

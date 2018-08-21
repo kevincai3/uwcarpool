@@ -1,0 +1,90 @@
+.container {
+  max-width: 700px;
+  background-color: white;
+  display: flex;
+  box-shadow: 3px 4px 4px 0px rgba(0, 0, 0, .3);
+  font-size: .875rem;
+}
+
+.vertical_bar {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 auto;
+  width: 5px;
+}
+
+.type_bar {
+  flex: 1 1 0;
+  height: 100%;
+  width: 100%;
+  background-color: red;
+}
+
+.pad_right {
+  margin-right: 10px;
+}
+
+.header {
+  background-color: var(--color-ocean-blue);
+  width: 100%;
+  display: flex;
+  padding: 8px 13px;
+  color: var(--color-white-blue);
+  font-weight: 600;
+  letter-spacing: 0.6px;
+}
+
+.body {
+  width: 100%;
+}
+
+.left_header {
+  flex: 1 0 auto;
+}
+
+.right_header {
+  flex: 1 0 auto;
+  text-align: right;
+}
+
+.footer {
+  width: 100%;
+  display: flex;
+  padding: 2px 8px;
+}
+
+.left_footer {
+  flex: 1 0 auto;
+  font-size: .75rem;
+  font-weight: 600;
+  position: relative;
+}
+
+.right_footer {
+  flex: 1 0 auto;
+  text-align: right;
+  color: var(--color-deep-blue);
+  font-weight: 600;
+}
+
+.message {
+  white-space: pre-line;
+  margin-left: 5px;
+  margin-top: 3px;
+}
+
+.arrow {
+  position: relative;
+  top: -1px;
+}
+
+.icon {
+  font-size: 1.125rem;
+  position: relative;
+  top: 1px;
+}
+
+.more_lines {
+  position: absolute;
+  bottom: 0;
+}

@@ -13,9 +13,9 @@ def main():
     statement = "INSERT INTO derived_posts(post_id, stage_1, stage_2, stage_3) VALUES (%s, %s, %s, %s) ON CONFLICT (post_id) DO UPDATE SET stage_3 = EXCLUDED.stage_3, stage_2 = EXCLUDED.stage_2, stage_1 = EXCLUDED.stage_1;"
     for row in results:
         c.print(".")
-        stage_1 = process(row[3], False)
-        stage_2 = process(row[3])
-        stage_3 = stage3(stage_2)
+        stage_1 = process(row[3], False, False)
+        stage_2 = process(row[3], True, False)
+        stage_3 = process(row[3])
         value = (row[0], ','.join(stage_1), ','.join(stage_2), ','.join(stage_3))
         ins_conn.execute(statement, value)
     conn.close()

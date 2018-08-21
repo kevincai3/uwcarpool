@@ -4,8 +4,8 @@ import nltk
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from hunspell import Hunspell
-from .abbr import replace_tokens
-from .weighting import weighting
+from clean_tokens.abbr import replace_tokens
+from clean_tokens.weighting import weighting
 
 hspell = Hunspell('en_US', hunspell_data_dir='./clean_tokens/dictionary')
 
@@ -17,7 +17,7 @@ stopset.discard('pm')
 
 lemma = WordNetLemmatizer()
 
-def process(message, modify=True):
+def process(message, modify=True, process_extra=True):
     m = message.lower()
     m = clean_message(m, ' ')
     m = replace_symbols(m)
@@ -32,6 +32,8 @@ def process(message, modify=True):
         # print(t)
         t = lemmatize(t)
         # print(t)
+    if process_extra:
+        t = process_extra(t)
     return t
 
 def replace_symbols(message):
@@ -93,7 +95,11 @@ def clean_message(message, replacement):
     m = re.sub(r'\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*', replacement, m)
     return m
 
-def stage3(tokens):
+# Removes highway numbers
+# Removes hyphens for times
+# Removes references to 7/11
+# Removes spaces between number and am/pm
+def process_extra(tokens):
     t = tokens
     t = [token for token in t if not re.match(r'(400|401|403|404|407)', token)]
     t = [re.sub(r'(\d+)-[\d:]+', r'\1', token) for token in t]
@@ -104,4 +110,4 @@ def stage3(tokens):
 
 if __name__ == "__main__":
     print(process("Offering: Jun.3 Sunday 8pm Waterloo (Burger King) -> Mississauga Square One $10/Pearson Airport $40, text 5197211776"))
-    print(hspell.spell('wedmesday'))
+    print(hspell.spell('rhill'))

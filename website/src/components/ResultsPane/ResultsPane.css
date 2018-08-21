@@ -1,0 +1,42 @@
+.results_container {
+  margin-top: 20px;
+  margin-left: 120px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row-reverse;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+
+.color_square {
+  height: 18px;
+  width: 18px;
+  display: inline-block;
+  background-color: red;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.legend {
+  background-color: rgba(133, 133, 133, 0.08);
+  display: inline-block;
+  padding: 10px 50px 10px 20px;
+  flex: 0 0 auto;
+  height: fit-content;
+  margin-right: 30px;
+}
+
+.legend_header {
+  color: var(--color-deep-blue);
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.legend_row {
+  font-size: .875rem;
+  vertical-align: middle;
+}
+
+.results {
+  flex: 1 0 auto;
+}
