@@ -1,5 +1,5 @@
 import pandas as pd
-list_of_cities = pd.read_csv("frequent_cities.csv",  sep = ",",  encoding='latin-1')["adj_name"]
+list_of_cities = pd.read_csv("frequent_cities.csv",  sep = ",",  encoding='latin-1')["name"]
 
 #route detection general
 #pivots off the words "to" and "from"
@@ -53,7 +53,7 @@ def route_detection_1(tockenized_message):
     if((len(list_of_end) == 0) & (len(list_of_start) != 0)):
         list_of_end.append("waterloo")
         
-    return [list_of_start,list_of_end]
+    return list_of_start, list_of_end
 	
 #route detection Waterloo
 #pivots off the words "waterloo", "to" and "from"
@@ -70,10 +70,10 @@ def route_detection_2(tockenized_message):
                     if(tockenized_message.index("waterloo") < tockenized_message.index("to")):
                         #...from...waterloo...to...
                         list_of_start = ["waterloo"]
-                        list_of_end = [list(x for x in after_to if x in list_of_cities.values and x != "waterloo")]
+                        list_of_end = list(x for x in after_to if x in list_of_cities.values and x != "waterloo")
                     else:
                         #...from...to...waterloo...
-                        list_of_start = [list(x for x in before_to if x in list_of_cities.values and x != "waterloo")]
+                        list_of_start = list(x for x in before_to if x in list_of_cities.values and x != "waterloo")
                         list_of_end = ["waterloo"]
                 else:
                     #...to...from...
@@ -81,12 +81,12 @@ def route_detection_2(tockenized_message):
                     after_from = tockenized_message[tockenized_message.index("from"):]  
                     if(tockenized_message.index("waterloo") < tockenized_message.index("from")):
                         #...to...waterloo...from...
-                        list_of_start = [list(x for x in after_from if x in list_of_cities.values and x != "waterloo")]
+                        list_of_start = list(x for x in after_from if x in list_of_cities.values and x != "waterloo")
                         list_of_end = ["waterloo"]
                     else:
                         #...to...from...waterloo...
                         list_of_start = ["waterloo"]
-                        list_of_end = [list(x for x in before_from if x in list_of_cities.values and x != "waterloo")]
+                        list_of_end = list(x for x in before_from if x in list_of_cities.values and x != "waterloo")
                                       
             else:
                 #...to...            
@@ -94,7 +94,7 @@ def route_detection_2(tockenized_message):
                     #...waterloo...to...
                     after_to = tockenized_message[tockenized_message.index("to"):]                
                     list_of_start = ["waterloo"]
-                    list_of_end = [list(x for x in after_to if x in list_of_cities.values and x != "waterloo")]
+                    list_of_end = list(x for x in after_to if x in list_of_cities.values and x != "waterloo")
                 
                 else:
                     #...to...waterloo...                
@@ -131,12 +131,12 @@ def route_detection_2(tockenized_message):
             elif(len(list_of_end) == 0):
                 #...places...waterloo...                
                 list_of_end = ["waterloo"]
-			else
+            else:
                 #...places...waterloo...places...
-                #amibguous as we don't know where to put waterloo
-            #note that if there is "waterloo" but no "to" or "from"
-            #and "waterloo" is in the middle, it isnt used.
+                # we assume waterloo is a the start
+                list_of_start.append("waterloo")
+               
     else:
         return route_detection_1(tockenized_message)
     
-    return [list_of_start,list_of_end]  
+    return list_of_start, list_of_end   
