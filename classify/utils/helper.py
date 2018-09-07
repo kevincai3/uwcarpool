@@ -15,17 +15,23 @@ def pad(num, size=2):
         return str(num)
 
 def format_time(time):
-    hour = time[0]
-    suffix = "AM"
-    if hour > 12:
-        hour -= 12
-        suffix = "PM"
-    return f"{pad(hour)}:{pad(time[1])}{suffix}"
+	if time == None:
+		return None
+	else:
+		hour = time[0]
+		suffix = "AM"
+		if hour > 12:
+			hour -= 12
+			suffix = "PM"
+		return f"{pad(hour)}:{pad(time[1])}{suffix}"
 
 def format_datetuple(date):
-    year, month, day = date
-    return f"{year}-{pad(month)}-{pad(day)}"
-
+	if date == None:
+		return None
+	else:
+		year, month, day = date
+		return f"{year}-{pad(month)}-{pad(day)}"
+		
 def combine_locations(parsed, locations):
     joined_locations = [" ".join(tokens) for tokens in locations]
     return f"{parsed} ({','.join(locations)})"
