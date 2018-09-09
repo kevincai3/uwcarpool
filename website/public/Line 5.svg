@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="29px" height="8px" viewBox="0 0 29 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>Line 5</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="square">
+        <g id="Trip-Card" transform="translate(-127.000000, -16.000000)" fill="#ECF5FF" stroke="#ECF5FF">
+            <path d="M128,20 L155,20" id="Line-5"></path>
+            <path id="Line-5-decoration-1" d="M155,20 L144.2,17 L144.2,23 L155,20 Z"></path>
+        </g>
+    </g>
+</svg>
