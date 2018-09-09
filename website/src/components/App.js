@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { ApolloProvider } from 'react-apollo';
 
 import client from '../apolloClient.js';
-import { Provider } from './Context.js';
 
 const ContextType = {
   // Enables critical path CSS rendering
