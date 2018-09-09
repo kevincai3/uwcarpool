@@ -4,11 +4,10 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 import s from './Layout.css';
 import Header from '../Header/Header.js';
-import Feedback from '../Feedback';
 import Footer from '../Footer';
 import Base from '../Base/Base.js';
 
-class Layout extends React.Component {
+class Layout extends React.PureComponent {
   static propTypes = {
     children: PropTypes.node.isRequired,
   };

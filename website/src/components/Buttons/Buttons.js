@@ -7,7 +7,7 @@ import { xor } from 'lodash';
 import ButtonMenu from './ButtonMenu.js';
 import s from './Buttons.css';
 
-class SelectMenu extends React.Component {
+class SelectMenu extends React.PureComponent {
   constructor(props) {
     super(props);
   }
@@ -30,12 +30,13 @@ class SelectMenu extends React.Component {
   }
 }
 
-class SelectButton extends React.Component {
+class SelectButton extends React.PureComponent {
   static propTypes = {
     options: PropTypes.array.required,
     selected: PropTypes.array.required,
     selectedMultiple: PropTypes.boolean,
     allText: PropTypes.text,
+    onUpdate: PropTypes.func.required,
   }
 
   static defaultProps = {
@@ -61,6 +62,7 @@ class SelectButton extends React.Component {
     this.setState({
       selected: newSelected,
     });
+    this.props.onUpdate(newSelected);
   }
 
   processKeyUp(key) {
@@ -123,7 +125,9 @@ class SelectButton extends React.Component {
           clicked: this.selectedOption,
           keyUp: this.handleKeyUp,
         }}
-        text={text} />
+        text={text}
+        keepOpen={this.props.selectMultiple}
+        />
     )
   }
 }

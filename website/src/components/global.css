@@ -9,6 +9,7 @@
     font-weight: 400;
     font-size: 1em; /* ~16px; */
     line-height: 1.375; /* ~22px */
+    height: 100%;
   }
 
   body {
@@ -44,6 +45,10 @@
     border-radius: 3px;
     width: 100%;
     max-width: 40rem;
+  }
+
+  .searchbar::placeholder {
+    color: var(--color-medium-grey-transparent);
   }
 
   button {

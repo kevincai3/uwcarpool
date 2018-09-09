@@ -13,9 +13,8 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import className from 'classnames';
 import s from './Header.css';
 import Link from '../Link';
-import Navigation from '../Navigation';
 
-class Header extends React.Component {
+class Header extends React.PureComponent {
   static propTypes = {
     isLanding: PropTypes.bool,
   }

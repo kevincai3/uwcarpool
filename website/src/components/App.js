@@ -1,14 +1,9 @@
-/**
- * React Starter Kit (https://www.reactstarterkit.com/)
- *
- * Copyright © 2014-present Kriasoft, LLC. All rights reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE.txt file in the root directory of this source tree.
- */
-
 import React from 'react';
 import PropTypes from 'prop-types';
+import { ApolloProvider } from 'react-apollo';
+
+import client from '../apolloClient.js';
+import { Provider } from './Context.js';
 
 const ContextType = {
   // Enables critical path CSS rendering
@@ -20,28 +15,6 @@ const ContextType = {
   query: PropTypes.object,
 };
 
-/**
- * The top-level React component setting context (global) variables
- * that can be accessed from all the child components.
- *
- * https://facebook.github.io/react/docs/context.html
- *
- * Usage example:
- *
- *   const context = {
- *     history: createBrowserHistory(),
- *     store: createStore(),
- *   };
- *
- *   ReactDOM.render(
- *     <App context={context}>
- *       <Layout>
- *         <LandingPage />
- *       </Layout>
- *     </App>,
- *     container,
- *   );
- */
 class App extends React.PureComponent {
   static propTypes = {
     context: PropTypes.shape(ContextType).isRequired,
@@ -57,7 +30,11 @@ class App extends React.PureComponent {
   render() {
     // NOTE: If you need to add or modify header, footer etc. of the app,
     // please do that inside the Layout component.
-    return React.Children.only(this.props.children);
+    return (
+      <ApolloProvider client={client}>
+        { React.Children.only(this.props.children) }
+      </ApolloProvider>
+    )
   }
 }
 

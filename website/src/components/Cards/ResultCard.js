@@ -2,18 +2,19 @@ import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 
+import { groupIDToURL } from '../../utils/mappings.js'
 import s from './ResultCard.css';
 import arrowUrl from '../../../public/Line 5.svg';
 
-class ResultCard extends React.Component {
+class ResultCard extends React.PureComponent {
   static defaultProps = {
     defaultText: '----'
   }
 
   static propTypes = {
     data: PropTypes.shape({
-      id: PropTypes.number.isRequired,
       type: PropTypes.number.isRequired,
       start: PropTypes.string.isRequired,
       end: PropTypes.string.isRequired,
@@ -21,7 +22,7 @@ class ResultCard extends React.Component {
       time: PropTypes.string.isRequired,
       message: PropTypes.string.isRequired,
       fbId: PropTypes.string.isRequired,
-      groups: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+      groups: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
     })
   }
 
@@ -33,12 +34,14 @@ class ResultCard extends React.Component {
   }
 
   render() {
-    const { type, start, end, defaultText, date, time, groups, message } = this.props.data;
+    const {
+      type, start, end, defaultText, date, time, groups, message, fbId
+    } = this.props.data;
     const { willOverflow } = this.state;
-    const startText = start == "" ? defaultText : start;
-    const endText = end == "" ? defaultText : end;
-    const dateText = date == "" ? defaultText : date;
-    const timeText = time == "" ? defaultText : time;
+    const startText = start === "" ? defaultText : start;
+    const endText = end === "" ? defaultText : end;
+    const dateText = date === "" ? "------- --" : moment(date).format('MMMM D');
+    const timeText = time === "" ? "-- : --" : moment(time).format('h:mm a');
     return (
       <div className={s.container}>
         <div className={s.vertical_bar}>
@@ -48,9 +51,9 @@ class ResultCard extends React.Component {
           <div className={s.header}>
             <div className={s.left_header}>
               <i className={classNames(`fas ${ type == 1 ? 'fa-car' : 'fa-binoculars' }`, s.pad_right, s.icon)} />
-              <span className={s.pad_right}>{startText}</span>
+              <span className={classNames(s.pad_right, s.cap)}>{startText}</span>
               <img className={classNames(s.pad_right, s.arrow)} src={arrowUrl} />
-              <span>{endText}</span>
+              <span className={s.cap}>{endText}</span>
             </div>
             <div className={s.right_header}>
               <span>{dateText}, {timeText}</span>
@@ -65,7 +68,7 @@ class ResultCard extends React.Component {
             </div>
             <div className={s.right_footer}>
               <a className={s.pad_right}>Report Post</a>
-              <a>See on Facebook</a>
+              <a href={`http://${groupIDToURL(groups[0])}/permalink/${fbId}`} target="_blank">See on Facebook</a>
             </div>
           </div>
         </div>

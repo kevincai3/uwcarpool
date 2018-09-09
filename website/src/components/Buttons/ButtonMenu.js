@@ -5,11 +5,16 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 import s from './ButtonMenu.css';
 
-class ButtonMenu extends React.Component {
+class ButtonMenu extends React.PureComponent {
   static propTypes = {
     Element: PropTypes.element,
     text: PropTypes.string,
     passThrough: PropTypes.object,
+    keepOpen: PropTypes.boolean,
+  }
+
+  static defaultProps = {
+    keepOpen: false,
   }
 
   constructor(props) {
@@ -20,7 +25,7 @@ class ButtonMenu extends React.Component {
   }
 
   handleClickedOutside = (e) => {
-    if (this.node.contains(e.target)) {
+    if (this.node.contains(e.target)/* && this.node.keepOpen*/) {
       return;
     }
     if (this.state.expanded == true) {

@@ -39,6 +39,7 @@
   --color-white-blue: #ECF5FF;
 
   --color-medium-grey: #838383;
+  --color-medium-grey-transparent: #83838390; /* CSS does not support alpha channel with variables */
   --color-dark-black: #0D141D;
   --color-default-background: #F8F8F9;
 }
