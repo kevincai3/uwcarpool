@@ -1,5 +1,6 @@
 import pandas as pd
 from db import engine
+from clean_tokens.process import process
 
 def update_derived_posts(new_posts):
     new_posts_stage_1 = new_posts.apply(lambda x: process(x["message"], False, False), axis = 1)
