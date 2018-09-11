@@ -1,80 +1,35 @@
 import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import classNames from 'classnames';
+import moment from 'moment';
+import PropTypes from 'prop-types';
 
 import s from './Search.css';
 
 import Autocomplete from 'react-autocomplete';
+import { TYPES, LOCATIONS, TIMES, GROUPS }  from '../../utils/constants.js';
 import SelectButton from '../../components/Buttons/Buttons.js';
 import DateButton from '../../components/Buttons/DateButton.js';
 import ResultsPane from '../../components/ResultsPane/ResultsPane.js';
 
-const TYPES = ['Any Type', 'Driving', 'Looking'];
-const LOCATIONS = [
-  'Any Where',
-  'Waterloo',
-  'Toronto',
-  'Markham',
-  'Scarborough',
-  'Mississauga',
-  'North York',
-  'Fairview',
-  'Pearson',
-  'Brampton',
-  'London',
-  'Ottawa',
-  'Vaughan',
-  'Kitchener',
-  'Hamilton',
-  'Etobicoke',
-  'Oakville',
-  'Guelph',
-  'Kingston',
-  'Richmond Hill',
-  'Newmarket',
-  'Thornhill',
-  'Bayview',
-]
+class Search extends React.PureComponent {
+  static propTypes = {
+    query: PropTypes.string
+  }
 
-const TIMES = [
-  'Any Time',
-  '12:00 PM',
-  '1:00 AM',
-  '2:00 AM',
-  '3:00 AM',
-  '4:00 AM',
-  '5:00 AM',
-  '6:00 AM',
-  '7:00 AM',
-  '8:00 AM',
-  '9:00 AM',
-  '10:00 AM',
-  '11:00 AM',
-  '12:00 AM',
-  '1:00 PM',
-  '2:00 PM',
-  '3:00 PM',
-  '4:00 PM',
-  '5:00 PM',
-  '6:00 PM',
-  '7:00 PM',
-  '8:00 PM',
-  '9:00 PM',
-  '10:00 PM',
-  '11:00 PM',
-];
-
-const GROUPS = [
-  'Waterloo Open',
-  'Waterloo Closed',
-  'Laurier Closed',
-]
-
-class Search extends React.Component {
   constructor(props) {
     super(props)
+    // Initializes default state
     this.state = {
-      query: "",
+      query: this.props.query || "",
+      options: {
+        type: [0],
+        fromLoc: [0],
+        toLoc: [0],
+        date: moment(),
+        time: [0],
+        groups: [],
+      }
     }
   }
 
@@ -82,10 +37,18 @@ class Search extends React.Component {
     this.setState({query: event.target.value});
   }
 
+  updateOption = (optionKey, value) => {
+    this.setState({
+      options: {
+        ...this.state.options,
+        [optionKey]: value,
+      },
+    });
+  }
+
   render() {
     const placeholderText = "Looking for ride from blah to blah";
-    const query = this.state.query;
-    let value = "";
+    const { query, options } = this.state;
     return (
       <div>
         <div className={s.top_container}>
@@ -94,19 +57,19 @@ class Search extends React.Component {
             <button className={classNames("button", s.button)} type="input">Search</button>
           </div>
           <div className={s.filter_row}>
-            <SelectButton options={TYPES} selected={[1]} />
-            <SelectButton options={LOCATIONS} selected={[1]} />
+            <SelectButton options={TYPES} selected={options.type} onUpdate={(newVal) => this.updateOption('type', newVal)} />
+            <SelectButton options={LOCATIONS} selected={options.fromLoc} onUpdate={(newVal) => this.updateOption('fromLoc', newVal)} />
             <span className={s.label}>to</span>
-            <SelectButton options={LOCATIONS} selected={[1]} />
+            <SelectButton options={LOCATIONS} selected={options.toLoc} onUpdate={(newVal) => this.updateOption('toLoc', newVal)} />
             <span className={s.vertical_line} />
-            <DateButton />
-            <SelectButton options={TIMES} selected={[1]} />
+            <DateButton date={options.date} onUpdate={(newVal) => this.updateOption('date', newVal)} />
+            <SelectButton options={TIMES} selected={options.time} onUpdate={(newVal) => this.updateOption('time', newVal)} />
             <span className={s.vertical_line} />
-            <SelectButton options={GROUPS} selected={[1, 2]} selectMultiple={true} allText="All Groups"/>
+            <SelectButton options={GROUPS} selected={options.groups} selectMultiple={true} allText="All Groups" onUpdate={(newVal) => this.updateOption('groups', newVal)} />
           </div>
         </div>
         <div className={s.horizontal_line} />
-        <ResultsPane />
+        <ResultsPane params={this.state.options} query={this.state.query}/>
       </div>
     );
   }

@@ -13,7 +13,7 @@ import classNames from 'classnames';
 import s from './Footer.css';
 import Link from '../Link';
 
-class Footer extends React.Component {
+class Footer extends React.PureComponent {
   render() {
     return (
       <div className={s.root}>

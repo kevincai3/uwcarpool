@@ -13,13 +13,13 @@ import s from './DateButton.css'
 
 const DatePicker = withStyles(datePickerStyles, datePickerOverride)(UnstyledDatePicker);
 
-class DateMenu extends React.Component {
+class DateMenu extends React.PureComponent {
   constructor(props) {
     super(props);
   }
 
   render() {
-    const {date, onChange, setAllDate} = this.props;
+    const {date, isAllDates, onChange, setAllDate} = this.props;
     const validDates = range(0, 8).map(offset => moment().add(offset, "days"));
     return (
       <div className={s.container}>
@@ -27,6 +27,8 @@ class DateMenu extends React.Component {
           selected={date}
           onChange={onChange}
           includeDates={validDates}
+          startDate={isAllDates ? validDates[0] : null}
+          endDate={isAllDates ? validDates[7] : null}
           inline />
         <button
           className={
@@ -39,11 +41,11 @@ class DateMenu extends React.Component {
   }
 }
 
-class DateButton extends React.Component {
+class DateButton extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      date: moment(),
+      date: props.date,
       isAllDates: false,
     }
   }
@@ -57,7 +59,7 @@ class DateButton extends React.Component {
 
   setAllDate = () => {
     this.setState({
-      date: null,
+      date: undefined,
       isAllDates: true,
     })
   }
@@ -68,7 +70,8 @@ class DateButton extends React.Component {
       <ButtonMenu
         Element={DateMenu}
         passThrough={{
-          date: isAllDates ? "" : date,
+          date,
+          isAllDates,
           onChange: this.updateDate,
           setAllDate: () => this.setAllDate(),
         }}

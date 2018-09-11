@@ -11,7 +11,7 @@ import Header from '../../components/Header/Header.js';
 import Link from '../../components/Link';
 import phrases from './phrases.js';
 
-class Home extends React.Component {
+class Home extends React.PureComponent {
   constructor(props) {
     super(props)
     this.state = {

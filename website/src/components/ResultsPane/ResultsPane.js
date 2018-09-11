@@ -1,12 +1,17 @@
 import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import classNames from 'classnames';
+import { Query } from 'react-apollo';
+import gql from 'graphql-tag';
+import { mapPostData } from '../../utils/mappings.js';
 
 import s from './ResultsPane.css';
 
-import ResultCard from '../Cards/ResultCard.js'
+import ResultCard from '../Cards/ResultCard.js';
+import LoadingSpinner from '../Loading/LoadingSpinner.js';
+import { CANONICAL_TYPES, CANONICAL_LOCATIONS } from '../../utils/constants.js';
 
-class LegendRow extends React.Component {
+class LegendRow extends React.PureComponent {
   constructor(props) {
     super(props);
   }
@@ -22,12 +27,13 @@ class LegendRow extends React.Component {
   }
 }
 
-class ResultsPane extends React.Component {
+class ResultsPane extends React.PureComponent {
   constructor(props) {
     super(props)
   }
 
   render() {
+    const { posts } = this.props;
     return (
       <div className={s.results_container}>
         <div className={s.legend}>
@@ -35,22 +41,58 @@ class ResultsPane extends React.Component {
           {[1].map(row => <LegendRow text={"University of Waterloo Carpool"} color={""} />)}
         </div>
         <div className={s.results}>
-          <div style={{marginBottom: "20px"}}>4 Results Found</div>
-          <ResultCard data={{
-            id: 123,
-            type: 1,
-            start: "Mississauga",
-            end: "Waterloo",
-            date: "June 12",
-            time: "10:00 AM",
-            message: "sjdkal\n jskaldsd\n j29klasjd\n k2jqljsidk\n",
-            fbId: "9210i30912i319231",
-            groups: [1, 2],
-          }}/>
+          <div style={{marginBottom: "20px"}}>
+            {posts.length} Result{posts.length == 1 ? '' : 's'} Found
+          </div>
+
+          <div>
+            { posts.map(post => (
+                <ResultCard data={mapPostData(post)}/>
+              ))
+            }
+          </div>
         </div>
       </div>
     )
   }
 }
 
-export default withStyles(s)(ResultsPane);
+const GraphQLWrapper = (props) => {
+  return (
+    <Query
+      query={gql`
+      query Posts($strQuery: String, $postType: String, $fromLoc: String, $toLoc: String, $date: String){
+        posts(strQuery: $strQuery, postType: $postType, fromLoc: $fromLoc, toLoc: $toLoc, date: $date) {
+          id
+          postType
+          fromLoc
+          toLoc
+          body
+          date
+          time
+          groups {
+            name
+            postLink
+          }
+        }
+      }`
+      }
+      variables={{
+        strQuery: props.query,
+        postType: CANONICAL_TYPES[props.params.type[0]],
+        fromLoc: CANONICAL_LOCATIONS[props.params.fromLoc[0]],
+        toLoc: CANONICAL_LOCATIONS[props.params.toLoc[0]],
+        date: props.params.date.format(),
+      }}
+    >
+      {({loading, error, data}) => {
+        if (loading) return <LoadingSpinner />;
+        if (error) return <p>Error</p>;
+
+        return <ResultsPane { ...props } posts={data.posts}/>;
+      }}
+    </Query>
+  )
+}
+
+export default withStyles(s)(GraphQLWrapper);

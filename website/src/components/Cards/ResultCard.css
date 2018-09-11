@@ -88,3 +88,7 @@
   position: absolute;
   bottom: 0;
 }
+
+.cap {
+  text-transform: capitalize;
+}
