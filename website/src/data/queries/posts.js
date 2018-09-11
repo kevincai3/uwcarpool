@@ -28,7 +28,7 @@ function buildPost(rawPosts) {
 }
 
 function processPosts(rawPosts) {
-  const groupedPosts = groupBy(rawPosts, 'classified_id');
+  const groupedPosts = groupBy(rawPosts, 'trip_id');
   const processedPosts = Object.values(groupedPosts).map(buildPost);
   console.log(JSON.stringify(processedPosts));
   return processedPosts;

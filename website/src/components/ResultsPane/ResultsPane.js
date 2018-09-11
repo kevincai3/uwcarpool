@@ -58,6 +58,7 @@ class ResultsPane extends React.PureComponent {
 }
 
 const GraphQLWrapper = (props) => {
+  const dateParam = props.params.date == undefined ? "" : props.params.date.format();
   return (
     <Query
       query={gql`
@@ -82,7 +83,7 @@ const GraphQLWrapper = (props) => {
         postType: CANONICAL_TYPES[props.params.type[0]],
         fromLoc: CANONICAL_LOCATIONS[props.params.fromLoc[0]],
         toLoc: CANONICAL_LOCATIONS[props.params.toLoc[0]],
-        date: props.params.date.format(),
+        date: dateParam,
       }}
     >
       {({loading, error, data}) => {

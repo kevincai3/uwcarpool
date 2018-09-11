@@ -3,28 +3,30 @@ import moment from 'moment';
 import db from "./db.js";
 
 function findPosts(postType, fromLoc, toLoc, date, groups) {
-  let query = db('classified_posts')
-    .join('post_to_classified', 'classified_posts.classified_id', '=', 'post_to_classified.classified_id')
-    .join('posts', 'post_to_classified.post_id', '=', 'posts.id')
-    .where('classified_posts.date', '>=', db.fn.now())
+  console.log(postType, fromLoc, toLoc, date, groups)
+  let query = db("groups").with('trips', db.raw('select * from trips join groups on trips.post_id = groups.post_id'))
+    .join('trips', 'trips.group_id', '=', 'groups.group_id')
+    .join('posts', 'posts.id', '=', 'groups.post_id')
+    .where('trips.date', '>=', '2018-06-28'/*db.fn.now()*/)
 
   if (postType) {
-    query = query.where('classified_posts.post_type', postType);
+    query = query.where('trips.post_type', postType);
   }
 
   if (fromLoc) {
-    query = query.where('classified_posts.from_loc', fromLoc);
+    query = query.where('trips.from_loc', fromLoc);
   }
 
   if (toLoc) {
-    query = query.where('classified_posts.to_loc', toLoc);
+    query = query.where('trips.to_loc', toLoc);
   }
 
   if (date) {
-    query = query.where('classified_posts.date', '=', moment(date).format('YYYY-MM-DD'))
+    query = query.where('trips.date', '>', moment(date).subtract('1', 'days').format('YYYY-MM-DD')).where('trips.date', '<', moment(date).add('1', 'days').format('YYYY-MM-DD'));
   }
 
   if (groups) {}
+  console.log(query.toString());
 
   return query.select([
     'posts.id',
@@ -32,12 +34,12 @@ function findPosts(postType, fromLoc, toLoc, date, groups) {
     'posts.source',
     'posts.fbid',
     'posts.posttime',
-    'classified_posts.classified_id',
-    'classified_posts.from_loc',
-    'classified_posts.to_loc',
-    'classified_posts.date',
-    'classified_posts.time',
-    'classified_posts.post_type',
+    'trips.trip_id',
+    'trips.from_loc',
+    'trips.to_loc',
+    'trips.date',
+    'trips.time',
+    'trips.post_type',
   ]);
 }
 
