@@ -5,7 +5,7 @@ from sklearn.ensemble import RandomForestClassifier
 from db import engine
 
 def fetch_data():
-    query = "SELECT post.id, derived.stage_3, manual.post_type FROM posts as post JOIN derived_posts AS derived ON derived.post_id = post.id JOIN manual_posts AS manual ON manual.post_id = post.id WHERE derived.stage_3 IS NOT NULL AND manual.post_type IS NOT NULL"
+    query = "SELECT post.post_id, derived.stage_3, manual.post_type FROM posts as post JOIN derived_posts AS derived ON derived.post_id = post.post_id JOIN manual_posts AS manual ON manual.post_id = post.post_id WHERE derived.stage_3 IS NOT NULL AND manual.post_type IS NOT NULL"
     posts = pd.read_sql_query(query, engine)
     return posts
 
