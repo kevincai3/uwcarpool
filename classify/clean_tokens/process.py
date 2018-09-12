@@ -17,7 +17,7 @@ stopset.discard('pm')
 
 lemma = WordNetLemmatizer()
 
-def process(message, modify=True, process_extra=True):
+def process(message, modify=True, remove_extra=True):
     m = message.lower()
     m = clean_message(m, ' ')
     m = replace_symbols(m)
@@ -32,7 +32,7 @@ def process(message, modify=True, process_extra=True):
         # print(t)
         t = lemmatize(t)
         # print(t)
-    if process_extra:
+    if remove_extra:
         t = process_extra(t)
     return t
 
