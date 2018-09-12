@@ -17,7 +17,9 @@ class Layout extends React.PureComponent {
       <Base>
         <div className={s.container}>
           <Header />
-          {this.props.children}
+          <div className={s.content}>
+            {this.props.children}
+          </div>
           <Footer />
         </div>
       </Base>

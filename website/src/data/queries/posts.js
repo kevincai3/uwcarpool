@@ -6,6 +6,7 @@ import {
 import PostType from '../types/PostType.js';
 import { findPosts } from '../db/queries.js';
 import { groupBy, uniqBy } from 'lodash';
+import moment from 'moment';
 
 function buildPost(rawPosts) {
   const newestPost = rawPosts.sort((postA, postB) => postA.posttime - postB.posttime)[0];
@@ -16,12 +17,12 @@ function buildPost(rawPosts) {
     group => group.source
   );
   return {
-    id: newestPost.classified_id + "-" + newestPost.posttime.toUTCString(),
+    id: newestPost.trip_id + "-" + newestPost.posttime.toUTCString(),
     postType: newestPost.post_type,
     fromLoc: newestPost.from_loc,
     toLoc: newestPost.to_loc,
     body: newestPost.message,
-    date: newestPost.date,
+    date: moment(newestPost.date).format(),
     time: newestPost.time,
     groups,
   }

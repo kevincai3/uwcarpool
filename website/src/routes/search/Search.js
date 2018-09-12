@@ -55,7 +55,7 @@ class Search extends React.PureComponent {
     const placeholderText = "Looking for ride from blah to blah";
     const { query, searchBar, options } = this.state;
     return (
-      <div>
+      <div className={s.container}>
         <div className={s.top_container}>
           <div>
             <input type="text" className={classNames("searchbar", s.searchbar)} placeholder={placeholderText} value={searchBar} onChange={this.updateSearchBar} />

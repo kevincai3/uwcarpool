@@ -1,6 +1,12 @@
+@import "../variables.css";
+
 .container {
   position: relative;
   min-height: 100vh;
+}
+
+.content {
+  padding-bottom: var(--footer-height);
 }
 
 hr {

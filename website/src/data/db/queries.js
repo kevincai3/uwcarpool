@@ -6,7 +6,7 @@ function findPosts(postType, fromLoc, toLoc, date, groups) {
   console.log(postType, fromLoc, toLoc, date, groups)
   let query = db("groups").with('trips', db.raw('select * from trips join groups on trips.post_id = groups.post_id'))
     .join('trips', 'trips.group_id', '=', 'groups.group_id')
-    .join('posts', 'posts.id', '=', 'groups.post_id')
+    .join('posts', 'posts.post_id', '=', 'groups.post_id')
     .where('trips.date', '>=', '2018-06-28'/*db.fn.now()*/)
 
   if (postType) {
@@ -29,7 +29,7 @@ function findPosts(postType, fromLoc, toLoc, date, groups) {
   console.log(query.toString());
 
   return query.select([
-    'posts.id',
+    'posts.post_id',
     'posts.message',
     'posts.source',
     'posts.fbid',
