@@ -18,7 +18,7 @@ const PostType = new ObjectType({
     toLoc: { type: StringType },
     body: { type: StringType },
     date: { type: StringType },
-    time: { type: IntType },
+    time: { type: StringType },
     groups: { type: new NonNull(new ListType(new NonNull(GroupType))) }
   },
 })

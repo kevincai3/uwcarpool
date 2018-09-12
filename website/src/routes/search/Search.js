@@ -22,6 +22,7 @@ class Search extends React.PureComponent {
     // Initializes default state
     this.state = {
       query: this.props.query || "",
+      searchBar: this.props.query || "",
       options: {
         type: [0],
         fromLoc: [0],
@@ -33,8 +34,12 @@ class Search extends React.PureComponent {
     }
   }
 
-  updateQuery = (event) => {
-    this.setState({query: event.target.value});
+  updateQuery = () => {
+    this.setState({query: this.state.searchBar});
+  }
+
+  updateSearchBar = (event) => {
+    this.setState({searchBar: event.target.value});
   }
 
   updateOption = (optionKey, value) => {
@@ -48,13 +53,13 @@ class Search extends React.PureComponent {
 
   render() {
     const placeholderText = "Looking for ride from blah to blah";
-    const { query, options } = this.state;
+    const { query, searchBar, options } = this.state;
     return (
-      <div>
+      <div className={s.container}>
         <div className={s.top_container}>
           <div>
-            <input type="text" className={classNames("searchbar", s.searchbar)} placeholder={placeholderText} value={query} onChange={this.updateQuery} />
-            <button className={classNames("button", s.button)} type="input">Search</button>
+            <input type="text" className={classNames("searchbar", s.searchbar)} placeholder={placeholderText} value={searchBar} onChange={this.updateSearchBar} />
+            <button className={classNames("button", s.button)} type="input" onClick={this.updateQuery}>Search</button>
           </div>
           <div className={s.filter_row}>
             <SelectButton options={TYPES} selected={options.type} onUpdate={(newVal) => this.updateOption('type', newVal)} />

@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import PropTypes from 'prop-types';
 import moment from 'moment';
 import { isString, range } from 'lodash';
 
@@ -42,6 +43,9 @@ class DateMenu extends React.PureComponent {
 }
 
 class DateButton extends React.PureComponent {
+  static propTypes = {
+    onUpdate: PropTypes.func.required,
+  }
   constructor(props) {
     super(props);
     this.state = {
@@ -55,6 +59,7 @@ class DateButton extends React.PureComponent {
       date: newDate,
       isAllDates: false,
     });
+    this.props.onUpdate(newDate);
   }
 
   setAllDate = () => {
@@ -62,6 +67,7 @@ class DateButton extends React.PureComponent {
       date: undefined,
       isAllDates: true,
     })
+    this.props.onUpdate(undefined);
   }
 
   render() {
