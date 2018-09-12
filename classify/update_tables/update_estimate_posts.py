@@ -14,8 +14,8 @@ def update_estimate_posts(new_derived_posts):
     locs = new_derived_posts.apply(lambda x:
                                 route_detection_2(x["stage_3"].split(',')), axis = 1)
     
-    from_locs = [x[0] for x in locs] 
-    to_locs = [x[1] for x in locs]
+    from_locs = [','.join(x[0]) for x in locs] 
+    to_locs = [','.join(x[1]) for x in locs] 
     
     dates = new_derived_posts.apply(lambda x:                                 
                                     format_datetuple(find_dates(x["stage_3"].split(','), x["posttime"])[0]), axis = 1)    
