@@ -12,5 +12,5 @@ def update_derived_posts(new_posts):
         "stage_2": new_posts_stage_2,
         "stage_3": new_posts_stage_3,
         "posttime": new_posts["posttime"]})
-    #new_derived_posts.drop(["posttime"], axis = 1).to_sql("derived_posts_test", engine, if_exists='append', chunksize= 10000, index = False)
+    new_derived_posts.drop(["posttime"], axis = 1).to_sql("derived_posts", engine, if_exists='append', chunksize= 10000, index = False)
     return new_derived_posts
