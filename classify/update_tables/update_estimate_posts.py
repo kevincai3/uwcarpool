@@ -34,6 +34,6 @@ def update_estimate_posts(new_derived_posts):
     
     new_estimate_posts["posttime"] = new_derived_posts["posttime"]
 
-    new_estimate_posts.drop(["posttime"], axis = 1).to_sql("estimate_posts_test", engine, if_exists='append', chunksize= 10000, index=False)
+    new_estimate_posts.drop(["posttime"], axis = 1).to_sql("estimate_posts", engine, if_exists='append', chunksize= 10000, index=False)
     
     return new_estimate_posts

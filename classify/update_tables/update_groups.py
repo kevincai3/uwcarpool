@@ -27,8 +27,8 @@ def update_groups(new_posts):
 
     new_posts["group_id"] = new_posts["group_id"].astype(int)
     
-    new_groups = new_posts[new_posts["group_id"] > old_max_group_id]
+    new_groups = new_posts[new_posts["group_id"] > old_max_group_id].drop_duplicates(subset = "group_id")
     
-    new_posts.to_sql("groups_test", engine, if_exists='append', chunksize= 10000, index = False)
+    new_posts.to_sql("groups", engine, if_exists='append', chunksize= 10000, index = False)
     
     return new_posts, new_groups
