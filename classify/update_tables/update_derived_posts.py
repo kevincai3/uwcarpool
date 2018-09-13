@@ -6,7 +6,7 @@ def update_derived_posts(new_posts):
     new_posts_stage_1 = new_posts.apply(lambda x: process(x["message"], False, False), axis = 1)
     new_posts_stage_2 = new_posts.apply(lambda x: process(x["message"], True, False), axis = 1)
     new_posts_stage_3 = new_posts.apply(lambda x: process(x["message"]), axis = 1)
-    new_posts_clean_message = new_posts.apply(lambda x: clean_message(x["message"], "*********"), axis = 1)
+    new_posts_clean_message = new_posts.apply(lambda x: clean_message(x["message"], "**********"), axis = 1)
     new_derived_posts = pd.DataFrame({
         "post_id": new_posts["post_id"],
         "stage_1": new_posts_stage_1,
