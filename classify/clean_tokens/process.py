@@ -41,6 +41,7 @@ def replace_symbols(message):
     m = re.sub(r"@+", r' at ', m)
     m = re.sub(r"/+", r' or ', m) # TODO:Need to ignore dates like 5/11
     m = re.sub(r"[-=]*>+", r' to ', m)
+	m = re.sub(r"<+[-=]*", r' to ', m)
     m = re.sub(r"[^a-zA-Z0-9$:-]", r' ', m) # Delete invalid characters
     # If the colon is not surrounded by numbers, its not a time
     m = re.sub(r"([^0-9]+):", r'\1 ', m)
