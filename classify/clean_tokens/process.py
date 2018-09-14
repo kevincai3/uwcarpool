@@ -3,11 +3,11 @@ import nltk
 #nltk.download('stopwords')
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
-from hunspell import Hunspell
+#from hunspell import Hunspell
 from clean_tokens.abbr import replace_tokens
 from clean_tokens.weighting import weighting
 
-hspell = Hunspell('en_US', hunspell_data_dir='./clean_tokens/dictionary')
+#hspell = Hunspell('en_US', hunspell_data_dir='./clean_tokens/dictionary')
 
 stopset = set(stopwords.words('english'))
 stopset.discard('at')
@@ -40,8 +40,8 @@ def replace_symbols(message):
     m = message
     m = re.sub(r"@+", r' at ', m)
     m = re.sub(r"/+", r' or ', m) # TODO:Need to ignore dates like 5/11
-    m = re.sub(r"[-=]*>+", r' to ', m)
-	m = re.sub(r"<+[-=]*", r' to ', m)
+    m = re.sub(r"[-=]*>+", r' to ', m) #replace arrow (->) with to
+    m = re.sub(r"<+[-=]*", r' from ', m) #replace arrow (<-) with from
     m = re.sub(r"[^a-zA-Z0-9$:-]", r' ', m) # Delete invalid characters
     # If the colon is not surrounded by numbers, its not a time
     m = re.sub(r"([^0-9]+):", r'\1 ', m)
