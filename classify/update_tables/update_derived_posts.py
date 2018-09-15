@@ -3,7 +3,6 @@ from db import engine, batch_update
 from clean_tokens.process import process, clean_message
 from utils.helper import generateUpsertSQL
 
-#UPDATE_STATEMENT = "INSERT INTO derived_posts(post_id, stage_1, stage_2, stage_3, clean_message) VALUES %s ON CONFLICT (post_id) DO UPDATE SET stage_3 = EXCLUDED.stage_3, stage_2 = EXCLUDED.stage_2, stage_1 = EXCLUDED.stage_1, clean_message = EXCLUDED.clean_message;"
 UPDATE_STATEMENT = generateUpsertSQL('derived_posts', 'post_id', ['post_id', 'stage_1', 'stage_2', 'stage_3', 'clean_message'])
 
 def update_derived_posts(new_posts):

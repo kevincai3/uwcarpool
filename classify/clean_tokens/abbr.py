@@ -35,6 +35,7 @@ base = {
     'square one': 'mississauga',
     'square 1': 'mississauga',
     'squareone': 'mississauga',
+    'spadina': 'toronto',
 }
 
 t = StringTrie(separator=' ')
