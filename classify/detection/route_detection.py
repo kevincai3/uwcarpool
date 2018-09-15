@@ -55,7 +55,7 @@ def route_detection_1(tockenized_message):
     if((len(list_of_end) == 0) & (len(list_of_start) != 0) & ("waterloo" not in list_of_start)):
         list_of_end.append("waterloo")
 
-    return list_of_start, list_of_end
+    return list(set(list_of_start)), list(set(list_of_end))
 
 #route detection Waterloo
 #pivots off the words "waterloo", "to" and "from"
@@ -145,4 +145,4 @@ def route_detection_2(tockenized_message):
     else:
         return route_detection_1(tockenized_message)
 
-    return list_of_start, list_of_end
+    return list(set(list_of_start)), list(set(list_of_end))
