@@ -43,7 +43,7 @@ def update_type():
     model, vectorizer = train_model()
     conn = engine.connect()
     ins_conn = engine.connect()
-    results = conn.execute("SELECT dp.post_id, dp.stage_3 FROM derived_posts AS dp JOIN posts AS p ON p.id = dp.post_id ORDER BY dp.post_id ASC")
+    results = conn.execute("SELECT dp.post_id, dp.stage_3 FROM derived_posts AS dp JOIN posts AS p ON p.id = dp.post_id WHERE dp.post_id > 182373 ORDER BY dp.post_id ASC")
     c = CountPrint(1000)
     ins_statement = "INSERT INTO estimate_posts(post_id, post_type) VALUES (%s, %s) ON CONFLICT (post_id) DO UPDATE SET post_type = EXCLUDED.post_type"
     for row in results:
