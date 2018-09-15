@@ -1,9 +1,10 @@
 from collections import Counter, defaultdict
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from dateutil import parser
 from detection.detection import detect
 from utils.debug import debug
-from utils.helper import match, indiceToToken
+from utils.helper import match, indiceToToken, get_time_zone, datetuple_to_datetime
+from pytz import utc
 import re
 
 # Values
@@ -96,6 +97,7 @@ def valid_state(state):
     return (state & 0b11) == 0b11
 
 def find_dates(tokens, postdate):
+    postdate = postdate.astimezone(get_time_zone())
     all_dates = detect(tokens, postdate, TOLERANCE, tag_date, valid_state, parse_date)
     return process_dates(all_dates, tokens, postdate)
 
@@ -109,7 +111,7 @@ def process_dates(results, tokens, postdate):
         d[(date.year, date.month, date.day)].append(indiceToToken(indice, tokens))
     counter = Counter({date: len(items) for date, items in d.items()})
     most_common = counter.most_common(1)[0][0]
-    return most_common, [(date, d[date]) for date, count in counter.most_common()]
+    return datetuple_to_datetime(most_common), [(date, d[date]) for date, count in counter.most_common()]
 
 def remove_invalid(results, postdate):
     min_date = postdate - timedelta(days=1)

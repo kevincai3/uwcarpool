@@ -32,11 +32,11 @@ class SelectMenu extends React.PureComponent {
 
 class SelectButton extends React.PureComponent {
   static propTypes = {
-    options: PropTypes.array.required,
-    selected: PropTypes.array.required,
-    selectedMultiple: PropTypes.boolean,
-    allText: PropTypes.text,
-    onUpdate: PropTypes.func.required,
+    options: PropTypes.array.isRequired,
+    selected: PropTypes.array.isRequired,
+    selectedMultiple: PropTypes.bool,
+    allText: PropTypes.string,
+    onUpdate: PropTypes.func.isRequired,
   }
 
   static defaultProps = {

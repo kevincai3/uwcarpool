@@ -32,6 +32,9 @@ base = {
     'laurier': 'waterloo',
     'burger king': 'waterloo',
     'rhill': 'richmondhill',
+    'square one': 'mississauga',
+    'square 1': 'mississauga',
+    'squareone': 'mississauga',
 }
 
 t = StringTrie(separator=' ')

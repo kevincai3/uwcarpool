@@ -1,6 +1,6 @@
 import re
 from collections import Counter, defaultdict
-from utils.helper import match, indiceToToken
+from utils.helper import match, indiceToToken, timetuple_to_datetime
 from detection.detection import detect
 from detection.timeparser import SPECIAL, HOUR, COMPLETE, AMBIGIOUS, MINUTE, BOTH, parse
 
@@ -42,9 +42,9 @@ def parse_time(buffer, tokens, postdate, results):
 
 def find_times(tokens, postdate):
     all_times = detect(tokens, postdate, TOLERANCE, tag_time, valid_state, parse_time, greedy=True)
-    return process_times(all_times, tokens)
+    return process_times(all_times, tokens, postdate)
 
-def process_times(times, tokens):
+def process_times(times, tokens, postdate):
     if len(times) == 0:
         return None, []
     d = defaultdict(list)
@@ -52,4 +52,4 @@ def process_times(times, tokens):
         d[(time.hour, time.minute)].append(indiceToToken(indice, tokens))
     counter = Counter({time: len(items) for time, items in d.items()})
     most_common = counter.most_common(1)[0][0]
-    return most_common, [(time, d[time]) for time, count in counter.most_common()]
+    return timetuple_to_datetime(most_common, postdate), [(time, d[time]) for time, count in counter.most_common()]

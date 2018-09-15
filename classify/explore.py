@@ -6,23 +6,17 @@ from utils.debug import debug
 
 def parse_date(post_id):
     results = fetch_token_post_with_date(post_id)
-    rtn = []
-    for row in results:
-        tokens = row[1].split(',')
-        best_date, all_date = find_dates(tokens, row[2])
-        debug(best_date, all_date)
-        formated_best_date = format_datetuple(best_date)
-        formated_all_date = format_all_date(all_date)
-        rtn += (formated_best_date, formated_all_date)
-    return rtn
+    row = results.fetchall()[0]
+    tokens = row[1].split(',')
+    best_date, all_date = find_dates(tokens, row[2])
+    debug(best_date, all_date)
+    formated_all_date = format_all_date(all_date)
+    return best_date, formated_all_date
 
 def parse_time(post_id):
     results = fetch_token_post_with_date(post_id)
-    rtn = []
-    for row in results:
-        tokens = row[1].split(',')
-        best_time, all_time = find_times(tokens, row[2])
-        formated_best_time = format_time(best_time)
-        formated_all_time = format_all_time(all_time)
-        rtn += (formated_best_time, formated_all_time)
-    return rtn
+    row = results.fetchall()[0]
+    tokens = row[1].split(',')
+    best_time, all_time = find_times(tokens, row[2])
+    formated_all_time = format_all_time(all_time)
+    return best_time, formated_all_time

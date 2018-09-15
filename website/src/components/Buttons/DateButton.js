@@ -44,7 +44,7 @@ class DateMenu extends React.PureComponent {
 
 class DateButton extends React.PureComponent {
   static propTypes = {
-    onUpdate: PropTypes.func.required,
+    onUpdate: PropTypes.func.isRequired,
   }
   constructor(props) {
     super(props);

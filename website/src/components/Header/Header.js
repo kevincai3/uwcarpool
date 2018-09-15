@@ -26,7 +26,7 @@ class Header extends React.PureComponent {
       <div className={s.root}>
         <div className={className(s.container, {[s.container_colored]: !this.props.isLanding})}>
           <div className={s.left_column}>
-            <Link to="/">UWCarpool</Link>
+            <Link to="/">UWCarpool<span className={s.super}>beta</span></Link>
           </div>
           <div className={s.right_column}>
             <Link to="/">About</Link>

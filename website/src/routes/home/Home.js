@@ -62,7 +62,12 @@ class Home extends React.PureComponent {
         <div className={s.root}>
           <Header isLanding={true} />
           <div className={s.image} />
-          <div className={s.text}><span>Ride from Waterloo to </span>{destination}</div>
+          <div className={s.text}>
+            <span>Find your next Waterloo carpool today!</span>
+            {/*
+            <span>Ride from Waterloo to </span>{destination}
+            */}
+          </div>
           <form className={s.input_form}>
             <input type="text" className={classNames("searchbar", s.searchbar)} placeholder={placeholderText} value={query} onChange={this.updateQuery} />
             <button className={classNames("button", s.button)} type="input" onClick={this.search}>Search</button>

@@ -7,14 +7,9 @@ import s from './ButtonMenu.css';
 
 class ButtonMenu extends React.PureComponent {
   static propTypes = {
-    Element: PropTypes.element,
+    Element: PropTypes.oneOfType([PropTypes.node, PropTypes.element]),
     text: PropTypes.string,
     passThrough: PropTypes.object,
-    keepOpen: PropTypes.boolean,
-  }
-
-  static defaultProps = {
-    keepOpen: false,
   }
 
   constructor(props) {
@@ -25,7 +20,7 @@ class ButtonMenu extends React.PureComponent {
   }
 
   handleClickedOutside = (e) => {
-    if (this.node.contains(e.target)/* && this.node.keepOpen*/) {
+    if (this.node.contains(e.target)) {
       return;
     }
     if (this.state.expanded == true) {

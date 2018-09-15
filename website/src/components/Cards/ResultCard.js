@@ -41,7 +41,7 @@ class ResultCard extends React.PureComponent {
     const startText = start === "" ? defaultText : start;
     const endText = end === "" ? defaultText : end;
     const dateText = date === "" ? "------- --" : moment(date).format('MMMM D');
-    const timeText = time === "" ? "-- : --" : time; //moment(time).format('h:mm a');
+    const timeText = time === "" ? "-- : --" : moment(time, "HH:mm:ss").format('h:mm A');
     return (
       <div className={s.container}>
         <div className={s.vertical_bar}>
@@ -67,7 +67,7 @@ class ResultCard extends React.PureComponent {
               {/*<span className={s.more_lines}>{5} more lines</span> */}
             </div>
             <div className={s.right_footer}>
-              <a className={s.pad_right}>Report Post</a>
+              {/*<a className={s.pad_right}>Report Post</a>*/}
               <a href={`http://${groupIDToURL(groups[0])}/permalink/${fbId}`} target="_blank">See on Facebook</a>
             </div>
           </div>

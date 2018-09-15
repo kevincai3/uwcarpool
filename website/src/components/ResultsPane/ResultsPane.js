@@ -62,21 +62,21 @@ const GraphQLWrapper = (props) => {
   return (
     <Query
       query={gql`
-      query Posts($strQuery: String, $postType: String, $fromLoc: String, $toLoc: String, $date: String){
-        posts(strQuery: $strQuery, postType: $postType, fromLoc: $fromLoc, toLoc: $toLoc, date: $date) {
-          id
-          postType
-          fromLoc
-          toLoc
-          body
-          date
-          time
-          groups {
-            name
-            postLink
+        query Posts($postType: String, $fromLoc: String, $toLoc: String, $date: String){
+          posts(postType: $postType, fromLoc: $fromLoc, toLoc: $toLoc, date: $date) {
+            id
+            postType
+            fromLoc
+            toLoc
+            body
+            date
+            time
+            groups {
+              name
+              postLink
+            }
           }
-        }
-      }`
+        }`
       }
       variables={{
         strQuery: props.query,
