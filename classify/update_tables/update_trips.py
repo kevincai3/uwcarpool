@@ -22,6 +22,7 @@ def update_trips(new_estimate_posts, new_groups):
     new_groups = new_groups.drop(["message"], axis = 1).drop(["posttime"], axis = 1).drop(["post_id"], axis = 1)
     
     new_trips = new_groups.join(new_estimate_posts, lsuffix="l").drop_duplicates("post_id")
+    new_trips = new_trips[new_trips["post_type"] != "o"]
     new_trips = splitDataFrameList(splitDataFrameList(new_trips, "from_loc", ","), "to_loc", ",")
     old_trips_id_max = pd.read_sql_query('select trip_id from trips', con=engine)["trip_id"].max()
     
