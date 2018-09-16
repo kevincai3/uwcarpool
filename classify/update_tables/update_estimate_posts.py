@@ -47,7 +47,7 @@ def update_estimate_posts(new_derived_posts):
               for post_id, post_type, best_date, all_dates, best_time, all_times, from_locs, to_locs
               in new_estimate_posts[['post_id', 'post_type', 'date', 'all_dates', 'time', 'all_times', 'from_loc', 'to_loc']].values]
 
-    batch_update(UPDATE_STATEMENT, values)
+    batch_update(UPDATE_STATEMENT, values, 1000)
 
     new_estimate_posts["time"] = pd.to_datetime(new_estimate_posts["time"]).dt.time
 
