@@ -2,6 +2,7 @@ import re
 from utils.debug import debug
 from datetime import datetime, timedelta
 from pytz import timezone
+from pandas import NaT
 
 def get_time_zone():
     return timezone("America/Toronto")
@@ -29,7 +30,7 @@ def format_time(time):
             if hour > 12:
                 hour -= 12
             suffix = "PM"
-            return f"{pad(hour)}:{pad(time[1])}{suffix}"
+        return f"{pad(hour)}:{pad(time[1])}{suffix}"
 
 def format_datetuple(date):
     if date == None:
@@ -63,3 +64,9 @@ def datetuple_to_datetime(datetuple):
 def timetuple_to_datetime(timetuple, postdate):
     hour, minute = timetuple
     return postdate.astimezone(get_time_zone()).replace(hour=hour, minute=minute, second=0, microsecond=0)
+
+def pandas_nat_to_none(value):
+    if value is NaT:
+        return None
+    else:
+        return value

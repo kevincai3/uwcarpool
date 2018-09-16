@@ -8,10 +8,10 @@ from detection.time_detection import find_times
 model, vectorizer = train_model()
 
 def classify_message(m):
-    m = process(m)        
-    current_datetime = datetime.datetime.now()    
-    dos = predict(model, vectorizer,",".join(m))
+    m = process(m)
+    current_datetime = datetime.datetime.now()
+    posttype = predict(model, vectorizer,",".join(m))
     routes = route_detection_2(m)
     dates = find_dates(m, current_datetime)
     times = find_times(m, current_datetime)
-    return dos, routes, dates, times
+    return posttype, routes, dates, times

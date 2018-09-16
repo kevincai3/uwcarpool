@@ -16,13 +16,17 @@ def fetch_token_post_with_date(post_id=None):
     conn = engine.connect()
     return conn.execute(query_string)
 
-def batch_update(sql, values, batch_size=100):
+def batch_update(sql, values, batch_size=100, input_size=None):
     connection = engine.raw_connection()
+    if input_size == None:
+        input_size = len(values)
     try:
-        cursor = connection.cursor()
-        execute_values(cursor, sql, values, None, batch_size)
-        cursor.close()
-        connection.commit()
+        for i in range(0, len(values), input_size):
+            cursor = connection.cursor()
+            execute_values(cursor, sql, values[i:i+input_size], None, batch_size)
+            cursor.close()
+            connection.commit()
+            print(".")
     except Exception as e:
         print(e)
     finally:
