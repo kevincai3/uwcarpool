@@ -26,6 +26,7 @@ const LOCATIONS = [
   'Thornhill',
   'Bayview',
 ]
+
 const CANONICAL_LOCATIONS = LOCATIONS.map(location => {
   if (location === 'Any Where') {
     return '';

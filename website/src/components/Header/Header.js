@@ -29,7 +29,7 @@ class Header extends React.PureComponent {
             <Link to="/">UWCarpool<span className={s.super}>beta</span></Link>
           </div>
           <div className={s.right_column}>
-            <Link to="/">About</Link>
+            {/*<Link to="/">About</Link>*/}
           </div>
         </div>
       </div>

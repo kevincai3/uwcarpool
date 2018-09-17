@@ -19,10 +19,6 @@ class Home extends React.PureComponent {
     }
   }
 
-  componentDidMount() { }
-
-  componentWillUnmount() { }
-
   updateQuery = (event) => {
     this.setState({query: event.target.value});
   }
@@ -68,9 +64,9 @@ class Home extends React.PureComponent {
             <span>Ride from Waterloo to </span>{destination}
             */}
           </div>
-          <form className={s.input_form}>
+          <form className={s.input_form} onSubmit={this.search}>
             <input type="text" className={classNames("searchbar", s.searchbar)} placeholder={placeholderText} value={query} onChange={this.updateQuery} />
-            <button className={classNames("button", s.button)} type="input" onClick={this.search}>Search</button>
+            <input className={classNames("button", s.button)} type="submit" value="Search" />
           </form>
         </div>
       </Base>

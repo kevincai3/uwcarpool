@@ -31,14 +31,12 @@ function buildPost(rawPosts) {
 function processPosts(rawPosts) {
   const groupedPosts = groupBy(rawPosts, 'trip_id');
   const processedPosts = Object.values(groupedPosts).map(buildPost);
-  console.log(JSON.stringify(processedPosts));
   return processedPosts;
 }
 
 const posts = {
   type: new ListType(PostType),
   args: {
-    strQuery: { type: StringType },
     postType: { type: StringType },
     fromLoc: { type: StringType },
     toLoc: { type: StringType },

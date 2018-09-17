@@ -1,4 +1,7 @@
 import { uniq } from 'lodash';
+import moment from 'moment';
+
+import { CANONICAL_TYPES, CANONICAL_LOCATIONS } from './constants.js';
 
 function mapPostData(postData) {
   return {
@@ -33,8 +36,33 @@ function groupIDToURL(groupId) {
   return base + (mapping[groupId] || "");
 }
 
+function paramsToPosition(params) {
+  const defaultValues = {
+    type: [0],
+    fromLoc: [0],
+    toLoc: [0],
+    date: moment(),
+    time: [0],
+    groups: []
+  }
+  if (params.postType) {
+    defaultValues.type = [Math.max(CANONICAL_TYPES.indexOf(params.postType), 0)]
+  }
+  if (params.fromLoc) {
+    defaultValues.fromLoc = [Math.max(CANONICAL_LOCATIONS.indexOf(params.fromLoc), 0)]
+  }
+  if (params.toLoc) {
+    defaultValues.toLoc = [Math.max(CANONICAL_LOCATIONS.indexOf(params.toLoc), 0)]
+  }
+  if (params.date) {
+    defaultValues.date = moment(params.date);
+  }
+  return defaultValues;
+}
+
 export {
   mapPostData,
   mapGroupToID,
   groupIDToURL,
+  paramsToPosition,
 };
