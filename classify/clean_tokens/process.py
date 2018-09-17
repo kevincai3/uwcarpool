@@ -59,7 +59,8 @@ def replace_symbols(message):
     m = re.sub(r"([0-9])-[0-9:]+(am|pm)", r'\1\2', m)
     # Drop stuff like 6ish
     m = re.sub(r"(\d)ish", r"\1", m)
-
+    m = re.sub("door to door",'',m) #remove "door to door" since we dont want unnecessary "to"s
+    m = re.sub("downtown toronto",'toronto',m) #replace "downtown toronto" with "toronto"
     m = re.sub(r" +", r' ', m) # Delete extraneous white spaces
     return m.strip()
 
