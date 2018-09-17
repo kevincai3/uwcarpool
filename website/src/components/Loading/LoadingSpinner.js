@@ -1,23 +1,34 @@
 import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import PropTypes from 'prop-types';
 
 import s from './LoadingSpinner.css';
 
-const LoadingSpinner = () => (
-  <div className="sk-circle">
-    <div className="sk-circle1 sk-child"></div>
-    <div className="sk-circle2 sk-child"></div>
-    <div className="sk-circle3 sk-child"></div>
-    <div className="sk-circle4 sk-child"></div>
-    <div className="sk-circle5 sk-child"></div>
-    <div className="sk-circle6 sk-child"></div>
-    <div className="sk-circle7 sk-child"></div>
-    <div className="sk-circle8 sk-child"></div>
-    <div className="sk-circle9 sk-child"></div>
-    <div className="sk-circle10 sk-child"></div>
-    <div className="sk-circle11 sk-child"></div>
-    <div className="sk-circle12 sk-child"></div>
-  </div>
-)
+const validStrings = [
+  'spin',
+  'bar',
+]
+
+class LoadingSpinner extends React.PureComponent {
+  static propTypes = {
+    type: PropTypes.string,
+  }
+
+  static defaultProps = {
+    type: 'spin'
+  }
+
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    let { type } = this.props
+    if (validStrings.indexOf(type) === -1) {
+      type = validStrings[0]
+    }
+    return <div className={`${type}loader`} />
+  }
+}
 
 export default withStyles(s)(LoadingSpinner);

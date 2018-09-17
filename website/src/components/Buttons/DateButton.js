@@ -20,12 +20,13 @@ class DateMenu extends React.PureComponent {
   }
 
   render() {
-    const {date, isAllDates, onChange, setAllDate} = this.props;
+    const {date, onChange, setAllDate} = this.props;
+    const isAllDates = date === null
     const validDates = range(0, 8).map(offset => moment().add(offset, "days"));
     return (
       <div className={s.container}>
         <DatePicker
-          selected={date}
+          selected={date || moment()}
           onChange={onChange}
           includeDates={validDates}
           startDate={isAllDates ? validDates[0] : null}
@@ -50,24 +51,21 @@ class DateButton extends React.PureComponent {
     super(props);
     this.state = {
       date: props.date,
-      isAllDates: false,
     }
   }
 
   updateDate = (newDate) => {
     this.setState({
       date: newDate,
-      isAllDates: false,
     });
     this.props.onUpdate(newDate);
   }
 
   setAllDate = () => {
     this.setState({
-      date: undefined,
-      isAllDates: true,
+      date: null,
     })
-    this.props.onUpdate(undefined);
+    this.props.onUpdate(null);
   }
 
   render() {
@@ -77,11 +75,10 @@ class DateButton extends React.PureComponent {
         Element={DateMenu}
         passThrough={{
           date,
-          isAllDates,
           onChange: this.updateDate,
           setAllDate: () => this.setAllDate(),
         }}
-        text={isAllDates ? "All Days" : date.format("MMMM D")}
+        text={date === null ? "All Days" : date.format("MMMM D")}
       />
     )
   }

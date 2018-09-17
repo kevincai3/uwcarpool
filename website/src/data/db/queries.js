@@ -3,7 +3,6 @@ import moment from 'moment';
 import db from "./db.js";
 
 function findPosts(postType, fromLoc, toLoc, date, groups) {
-  console.log(postType, fromLoc, toLoc, date, groups)
   let query = db("groups").with('trips', db.raw('select * from trips join groups on trips.post_id = groups.post_id'))
     .join('trips', 'trips.group_id', '=', 'groups.group_id')
     .join('posts', 'posts.post_id', '=', 'groups.post_id')
@@ -25,8 +24,7 @@ function findPosts(postType, fromLoc, toLoc, date, groups) {
     query = query.where('trips.date', '>', moment(date).subtract('1', 'days').format('YYYY-MM-DD')).where('trips.date', '<', moment(date).add('1', 'days').format('YYYY-MM-DD'));
   }
 
-  if (groups) {}
-  console.log(query.toString());
+  //query = query.where('posts.source', '=', '\'open_waterloo\'');
 
   return query.select([
     'posts.post_id',
