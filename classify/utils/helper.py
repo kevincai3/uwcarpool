@@ -2,7 +2,7 @@ import re
 from utils.debug import debug
 from datetime import datetime, timedelta
 from pytz import timezone
-from pandas import NaT
+import pandas as pd
 
 def get_time_zone():
     return timezone("America/Toronto")
@@ -70,3 +70,32 @@ def pandas_nat_to_none(value):
         return None
     else:
         return value
+
+def split_data_frame_list(df, target_column, output_type=int):    
+    row_accumulator = []
+    def split_list_to_rows(row):
+        split_row = row[target_column]
+        if isinstance(split_row, list):
+          for s in split_row:
+              new_row = row.to_dict()
+              new_row[target_column] = output_type(s)
+              row_accumulator.append(new_row)
+        else:
+          new_row = row.to_dict()
+          new_row[target_column] = output_type(split_row)
+          row_accumulator.append(new_row)  
+    df.apply(split_list_to_rows, axis=1)
+    new_df = pd.DataFrame(row_accumulator)  
+    return new_df
+
+def split_data_frame_string(df,target_column,separator):       
+    def split_list_to_rows(row,row_accumulator,target_column,separator):        
+        split_row = row[target_column].split(separator)
+        for s in split_row:
+            new_row = row.to_dict()
+            new_row[target_column] = s
+            row_accumulator.append(new_row)
+    new_rows = []
+    df.apply(split_list_to_rows,axis=1,args = (new_rows,target_column,separator))
+    new_df = pd.DataFrame(new_rows)
+    return new_df

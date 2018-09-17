@@ -21,6 +21,7 @@ base = {
     'sheppard': 'northyork',
     'university': 'waterloo',
     'pmall': 'scarborough',
+    'pacific': 'scarborough',
     'gta': 'toronto',
     'markville': 'markham',
     'fmp': 'markham',
