@@ -2,7 +2,7 @@ import re
 from utils.debug import debug
 from datetime import datetime, timedelta
 from pytz import timezone
-from pandas import NaT
+import pandas as pd
 
 def get_time_zone():
     return timezone("America/Toronto")
