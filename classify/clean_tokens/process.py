@@ -13,6 +13,7 @@ stopset.discard('at')
 stopset.discard('to')
 stopset.discard('am')
 stopset.discard('pm')
+stopset.discard('from')
 
 lemma = WordNetLemmatizer()
 
