@@ -12,9 +12,9 @@ def group_posts(posts):
     groups["posttime"] = posts.sort_values(by = "post_id")["posttime"]
     return groups
 
-def update_groups(new_posts, new_posts_are_all_posts = False):
+def update_groups(new_posts, all_posts = False):
     
-    if new_posts_are_all_posts:
+    if all_posts:
         new_posts = group_posts(new_posts)
         new_groups = new_posts
     
