@@ -6,7 +6,7 @@ function findPosts(postType, fromLoc, toLoc, date, groups) {
   let query = db('posts')
     .join('derived_posts', 'posts.post_id', '=', 'derived_posts.post_id')
     .join('groups', 'posts.post_id', '=', 'groups.post_id')
-    .join('trips', 'groups.group_id', '=', 'trips.trip_id')
+    .join('trips', 'groups.group_id', '=', 'trips.group_id')
     .where('trips.date', '>=', '2018-06-28'/*db.fn.now()*/)
 
   if (postType) {
