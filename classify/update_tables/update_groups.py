@@ -28,7 +28,7 @@ def update_groups(new_posts, all_posts = False):
     new_groups = None
     if all_posts:
         new_posts = group_posts(new_posts)
-        new_groups = new_posts
+        new_groups = new_posts.drop_duplicates(subset = "group_id")
     else:
         old_groups = pd.read_sql_query(old_groups_sql(), con=engine)
         new_posts = new_posts.assign(group_id = "")
