@@ -21,7 +21,7 @@ function buildPost(rawPosts) {
     postType: newestPost.post_type,
     fromLoc: newestPost.from_loc,
     toLoc: newestPost.to_loc,
-    body: newestPost.message,
+    body: newestPost.clean_message,
     date: moment(newestPost.date).format(),
     time: newestPost.time,
     groups,

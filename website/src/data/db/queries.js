@@ -3,9 +3,10 @@ import moment from 'moment';
 import db from "./db.js";
 
 function findPosts(postType, fromLoc, toLoc, date, groups) {
-  let query = db("groups").with('trips', db.raw('select * from trips join groups on trips.post_id = groups.post_id'))
-    .join('trips', 'trips.group_id', '=', 'groups.group_id')
-    .join('posts', 'posts.post_id', '=', 'groups.post_id')
+  let query = db('posts')
+    .join('derived_posts', 'posts.post_id', '=', 'derived_posts.post_id')
+    .join('groups', 'posts.post_id', '=', 'groups.post_id')
+    .join('trips', 'groups.group_id', '=', 'trips.trip_id')
     .where('trips.date', '>=', '2018-06-28'/*db.fn.now()*/)
 
   if (postType) {
@@ -24,11 +25,11 @@ function findPosts(postType, fromLoc, toLoc, date, groups) {
     query = query.where('trips.date', '>', moment(date).subtract('1', 'days').format('YYYY-MM-DD')).where('trips.date', '<', moment(date).add('1', 'days').format('YYYY-MM-DD'));
   }
 
-  //query = query.where('posts.source', '=', '\'open_waterloo\'');
+  query = query.where('posts.source', '=', 'open_waterloo');
 
   return query.select([
     'posts.post_id',
-    'posts.message',
+    'derived_posts.clean_message',
     'posts.source',
     'posts.fbid',
     'posts.posttime',

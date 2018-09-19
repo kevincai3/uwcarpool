@@ -16,6 +16,13 @@ function fetchQuery(query) {
     .catch(error => console.log(error));
 }
 
+function runUpdates() {
+  return fetch(pythonUrl + 'updatetables', {
+    method: 'post',
+  }).then(res => res.json())
+    .catch(error => console.log(error));
+}
+
 export {
   fetchQuery,
 };

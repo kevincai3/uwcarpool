@@ -38,7 +38,7 @@ class ResultsPane extends React.PureComponent {
       <div className={s.results_container}>
         <div className={s.legend}>
           <div className={s.legend_header}>Ridesharing Groups</div>
-          {[1].map(row => <LegendRow text={"University of Waterloo Carpool"} color={""} />)}
+          {[1].map(row => <LegendRow text={"University of Waterloo Rideshare"} color={""} />)}
         </div>
         <div className={s.results}>
           <div style={{marginBottom: "20px"}}>
