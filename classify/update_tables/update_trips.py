@@ -25,7 +25,7 @@ def update_trips(new_estimate_posts, new_groups):
 
     new_groups = new_groups.drop(["post_id"], axis = 1)
 
-    new_trips = new_groups.join(new_estimate_posts, lsuffix="l").drop_duplicates("post_id")
+    new_trips = new_groups.join(new_estimate_posts)
     new_trips = new_trips[new_trips["post_type"] != "o"]
     new_trips = splitDataFrameList(splitDataFrameList(new_trips, "from_loc", ","), "to_loc", ",")
 
