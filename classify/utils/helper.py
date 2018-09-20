@@ -1,7 +1,7 @@
 import re
 from utils.debug import debug
 from datetime import datetime, timedelta
-from pytz import timezone
+from pytz import timezone, utc
 import pandas as pd
 
 def get_time_zone():
@@ -63,7 +63,7 @@ def datetuple_to_datetime(datetuple):
 
 def timetuple_to_datetime(timetuple, postdate):
     hour, minute = timetuple
-    return postdate.astimezone(get_time_zone()).replace(hour=hour, minute=minute, second=0, microsecond=0)
+    return postdate.replace(hour=hour, minute=minute, second=0, microsecond=0)
 
 def pandas_nat_to_none(value):
     if value is pd.NaT:

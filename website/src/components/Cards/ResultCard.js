@@ -2,7 +2,7 @@ import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import moment from 'moment';
+import moment from 'moment-timezone';
 
 import { groupIDToURL } from '../../utils/mappings.js'
 import s from './ResultCard.css';
@@ -41,7 +41,7 @@ class ResultCard extends React.PureComponent {
     const startText = start === "" ? defaultText : start;
     const endText = end === "" ? defaultText : end;
     const dateText = date === "" ? "------- --" : moment(date).format('MMMM D');
-    const timeText = time === "" ? "-- : --" : moment(time, "HH:mm:ss").format('h:mm A');
+    const timeText = time === "" ? "-- : --" : moment.tz(time, "HH:mm:ss", 'utc').tz('America/Toronto').format('h:mm A');
     return (
       <div className={s.container}>
         <div className={s.vertical_bar}>
@@ -56,7 +56,7 @@ class ResultCard extends React.PureComponent {
               <span className={s.cap}>{endText}</span>
             </div>
             <div className={s.right_header}>
-              <span>{dateText}, {timeText}</span>
+              <span>{dateText}{/*, {timeText}*/}</span>
             </div>
           </div>
           <div className={s.message}>

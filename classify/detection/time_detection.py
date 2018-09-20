@@ -1,8 +1,9 @@
 import re
 from collections import Counter, defaultdict
-from utils.helper import match, indiceToToken, timetuple_to_datetime
+from utils.helper import match, indiceToToken, timetuple_to_datetime, get_time_zone
 from detection.detection import detect
 from detection.timeparser import SPECIAL, HOUR, COMPLETE, AMBIGIOUS, MINUTE, BOTH, parse
+from pytz import utc
 
 EXCLUDE = r'(\$d+|d+\$)'
 
@@ -41,6 +42,7 @@ def parse_time(buffer, tokens, postdate, results):
             results.append((buffer, time))
 
 def find_times(tokens, postdate):
+    postdate = postdate.astimezone(get_time_zone())
     all_times = detect(tokens, postdate, TOLERANCE, tag_time, valid_state, parse_time, greedy=True)
     return process_times(all_times, tokens, postdate)
 

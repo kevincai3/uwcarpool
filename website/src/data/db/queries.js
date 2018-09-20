@@ -1,5 +1,5 @@
 import knex from "knex"
-import moment from 'moment';
+import moment from 'moment-timezone';
 import db from "./db.js";
 
 function findPosts(postType, fromLoc, toLoc, date, groups) {
@@ -7,7 +7,7 @@ function findPosts(postType, fromLoc, toLoc, date, groups) {
     .join('derived_posts', 'posts.post_id', '=', 'derived_posts.post_id')
     .join('groups', 'posts.post_id', '=', 'groups.post_id')
     .join('trips', 'groups.group_id', '=', 'trips.group_id')
-    .where('trips.date', '>=', '2018-06-28'/*db.fn.now()*/)
+    .where('trips.date', '>=', moment().startOf('day').toISOString())
 
   if (postType) {
     query = query.where('trips.post_type', postType);
@@ -22,7 +22,10 @@ function findPosts(postType, fromLoc, toLoc, date, groups) {
   }
 
   if (date) {
-    query = query.where('trips.date', '>', moment(date).subtract('1', 'days').format('YYYY-MM-DD')).where('trips.date', '<', moment(date).add('1', 'days').format('YYYY-MM-DD'));
+    const startOfDate = moment(date).startOf('day')
+    query = query
+      .where('trips.date', '>', startOfDate.clone().subtract('1', 'days').format('YYYY-MM-DD'))
+      .where('trips.date', '<', startOfDate.clone().add('1', 'days').format('YYYY-MM-DD'));
   }
 
   query = query.where('posts.source', '=', 'open_waterloo');
