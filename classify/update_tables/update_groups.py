@@ -6,7 +6,7 @@ from utils.helper import split_data_frame_list, generateUpsertSQL
 UPDATE_STATEMENT = generateUpsertSQL('groups', 'post_id', ['group_id', 'post_id'])
 
 def get_max_group_id():
-    result = engine.execute("select max(group_id) from groups").fetchall()[0]
+    result = engine.execute("select max(group_id) from groups").fetchall()[0][0]
     if result == None:
         result = 0
     return result
@@ -14,7 +14,7 @@ def get_max_group_id():
 def old_groups_sql():
     threshhold = datetime.utcnow() - timedelta(weeks = 1)
     time_str = threshhold.strftime('%Y-%m-%d')
-    query = f'SELECT g.group_id, g.post_id, p.message FROM groups AS g JOIN posts AS p ON p.post_id = g.post_id where g.posttime > {time_str}'
+    query = f'SELECT g.group_id, g.post_id, p.message FROM groups AS g JOIN posts AS p ON p.post_id = g.post_id where p.posttime > {time_str}'
     return query
 
 def group_posts(posts):
