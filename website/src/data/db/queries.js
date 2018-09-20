@@ -24,7 +24,7 @@ function findPosts(postType, fromLoc, toLoc, date, groups) {
   if (date) {
     const startOfDate = moment(date).startOf('day')
     query = query
-      .where('trips.date', '>', startOfDate.clone().subtract('1', 'days').format('YYYY-MM-DD'))
+      .where('trips.date', '>=', startOfDate.clone().format('YYYY-MM-DD'))
       .where('trips.date', '<', startOfDate.clone().add('1', 'days').format('YYYY-MM-DD'));
   }
 
