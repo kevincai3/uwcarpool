@@ -18,6 +18,7 @@ base = {
     'airport': 'pearson',
     'yonge': 'northyork',
     'yorkdale': 'toronto',
+    'uoft': 'toronto',
     'sheppard': 'northyork',
     'university': 'waterloo',
     'pmall': 'scarborough',
@@ -36,7 +37,12 @@ base = {
     'square one': 'mississauga',
     'square 1': 'mississauga',
     'squareone': 'mississauga',
-    'spadina': 'toronto',
+    'utm': 'mississauga'
+    'spadina': 'toronto'
+    'uwo': 'london'
+    'western': 'london'
+    'niagrafalls': 'niagra'
+    'brock': 'stcatharines'
 }
 
 t = StringTrie(separator=' ')
