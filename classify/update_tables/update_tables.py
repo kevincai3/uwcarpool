@@ -13,7 +13,11 @@ def update_tables(all_posts = False):
     else:
         new_posts = obtain_new_posts()
 
+    print(len(new_posts))
+    if len(new_posts) == 0:
+        return None, None
     new_derived_posts = update_derived_posts(new_posts)
     new_estimate_posts = update_estimate_posts(new_derived_posts)
     new_posts, new_groups = update_groups(new_posts)
     new_trips = update_trips(new_estimate_posts, new_groups)
+    return new_posts, new_trips

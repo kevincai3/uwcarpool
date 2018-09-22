@@ -59,7 +59,7 @@ class Home extends React.PureComponent {
           <Header isLanding={true} />
           <div className={s.image} />
           <div className={s.text}>
-            <span>Find your next Waterloo carpool today!</span>
+            <span>Find your next Waterloo carpool!</span>
             {/*
             <span>Ride from Waterloo to </span>{destination}
             */}

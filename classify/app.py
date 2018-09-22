@@ -28,8 +28,11 @@ def parseParam():
 @app.route('/api/updatetables', methods=['POST'])
 def updateTrips():
     try:
-        rows = update_tables()
-        return jsonify({'rows': len(rows)})
+        new_posts, new_trips = update_tables()
+        return jsonify({
+            'newPosts': len(new_posts),
+            'newTrips': len(new_trips),
+        })
     except e as Exception:
         print(e)
         return 500

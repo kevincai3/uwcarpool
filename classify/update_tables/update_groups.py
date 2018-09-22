@@ -14,7 +14,8 @@ def get_max_group_id():
 def old_groups_sql():
     threshhold = datetime.utcnow() - timedelta(weeks = 1)
     time_str = threshhold.strftime('%Y-%m-%d')
-    query = f'SELECT g.group_id, g.post_id, p.message FROM groups AS g JOIN posts AS p ON p.post_id = g.post_id where p.posttime > {time_str}'
+    query = f'SELECT g.group_id, g.post_id, p.message FROM groups AS g JOIN posts AS p ON p.post_id = g.post_id where p.posttime > \'{time_str}\''
+    print(query)
     return query
 
 def group_posts(posts):
@@ -28,6 +29,10 @@ def update_groups(new_posts, all_posts = False):
     new_groups = None
     if all_posts:
         new_posts = group_posts(new_posts)
+        new_posts.astype({
+            'group_id': int,
+            'post_id': int,
+        }, copy=False)
         new_groups = new_posts.drop_duplicates(subset = "group_id")
     else:
         old_groups = pd.read_sql_query(old_groups_sql(), con=engine)
@@ -53,7 +58,8 @@ def update_groups(new_posts, all_posts = False):
 
         new_groups = new_posts[new_posts["group_id"] > max_group_id].drop_duplicates(subset = "group_id")
 
-    values = [(group_id.item(), post_id.item()) for group_id, post_id in new_posts[['group_id', 'post_id']].values]
+    new_groups = new_groups[['group_id', 'post_id', 'message']]
+    values = [(group_id, post_id) for group_id, post_id in new_posts[['group_id', 'post_id']].values]
 
     batch_update(UPDATE_STATEMENT, values, 1000, 10000)
 

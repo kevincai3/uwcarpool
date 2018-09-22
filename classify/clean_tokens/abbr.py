@@ -19,7 +19,7 @@ base = {
     'yonge': 'northyork',
     'yorkdale': 'toronto',
     'uoft': 'toronto',
-    'sheppard': 'northyork',    
+    'sheppard': 'northyork',
     'pmall': 'scarborough',
     'pacific': 'scarborough',
     'gta': 'toronto',
@@ -36,12 +36,12 @@ base = {
     'square one': 'mississauga',
     'square 1': 'mississauga',
     'squareone': 'mississauga',
-    'utm': 'mississauga'
-    'spadina': 'toronto'
-    'uwo': 'london'
-    'western': 'london'
-    'niagrafalls': 'niagra'
-    'brock': 'stcatharines'
+    'utm': 'mississauga',
+    'spadina': 'toronto',
+    'uwo': 'london',
+    'western': 'london',
+    'niagrafalls': 'niagra',
+    'brock': 'stcatharines',
 }
 
 t = StringTrie(separator=' ')
