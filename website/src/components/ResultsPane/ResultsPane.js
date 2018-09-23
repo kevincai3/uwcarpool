@@ -61,7 +61,7 @@ const GraphQLWrapper = (props) => {
   if (!('date' in props.params)) {
     return <LoadingSpinner />;
   }
-  const dateParam = props.params.date === null ? "" : props.params.date.format();
+  const dateParam = props.params.date === null ? "" : props.params.date.format('Y-M-D');
   return (
     <Query
       query={gql`
