@@ -8,7 +8,6 @@ import ParamType from '../types/ParamType.js';
 import { fetchQuery } from '../../pythonClient.js';
 
 function processParam(strQuery, results) {
-  console.log(results);
   return {
     ...results,
     id: md5(strQuery),

@@ -11,7 +11,7 @@ function runCommand() {
       runUpdates().then(rows => console.log(rows));
     });
   } catch (error) {
-    //console.log(error);
+    console.log(error);
   }
 }
 

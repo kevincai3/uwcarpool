@@ -156,7 +156,9 @@ app.use((err, req, res, next) => {
 });
 
 // Start updating database job
-//job.start()
+if (config.env === 'production') {
+  job.start();
+}
 
 //
 // Launch the server
