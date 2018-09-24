@@ -26,6 +26,7 @@ base = {
     'markville': 'markham',
     'fmp': 'markham',
     'mcmaster': 'hamilton',
+    'mac': 'hamilton'
     'downsview': 'northyork',
     'islington': 'etobicoke',
     'trt': 'toronto',
@@ -42,6 +43,8 @@ base = {
     'western': 'london',
     'niagrafalls': 'niagra',
     'brock': 'stcatharines',
+    'woodbridge': 'vaughan'
+    'kw': 'kitchener'
 }
 
 t = StringTrie(separator=' ')
