@@ -43,8 +43,8 @@ base = {
     'western': 'london',
     'niagrafalls': 'niagra',
     'brock': 'stcatharines',
-    'woodbridge': 'vaughan'
-    'kw': 'kitchener'
+    'woodbridge': 'vaughan',
+    'kw': 'kitchener',
 }
 
 t = StringTrie(separator=' ')
