@@ -1,5 +1,6 @@
 from pytz import utc
 from flask import Flask, request, jsonify
+import traceback
 
 from classify_search import classify_message
 from update_tables.update_tables import update_tables
@@ -27,12 +28,8 @@ def parseParam():
 
 @app.route('/api/updatetables', methods=['POST'])
 def updateTrips():
-    try:
-        new_posts, new_trips = update_tables()
-        return jsonify({
-            'newPosts': len(new_posts),
-            'newTrips': len(new_trips),
-        })
-    except e as Exception:
-        print(e)
-        return 500
+    new_posts, new_trips = update_tables()
+    return jsonify({
+        'newPosts': len(new_posts),
+        'newTrips': len(new_trips),
+    })

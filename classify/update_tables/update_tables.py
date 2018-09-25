@@ -15,7 +15,7 @@ def update_tables(all_posts = False):
 
     print(len(new_posts))
     if len(new_posts) == 0:
-        return None, None
+        return [], []
     new_derived_posts = update_derived_posts(new_posts)
     new_estimate_posts = update_estimate_posts(new_derived_posts)
     new_posts, new_groups = update_groups(new_posts)
