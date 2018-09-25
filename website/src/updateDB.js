@@ -4,8 +4,9 @@ import fs from 'fs';
 
 function runCommand() {
   try {
-    fs.accessSync('~/bin/scrap-fb', fs.constants.X_OK);
-    shell.exec('~/bin/scrap-fb', (code, stdout, stderr) => {
+    const path = '../../../bin/scrap-fb';
+    fs.accessSync(path, fs.constants.X_OK);
+    shell.exec(path, (code, stdout, stderr) => {
       console.log('Exit code:', code);
       console.log('Program output:', stdout);
       console.log('Program stderr:', stderr);
@@ -20,4 +21,5 @@ const job = new CronJob('* 0 * * * *', runCommand);
 
 export {
   job,
+  runCommand,
 }
