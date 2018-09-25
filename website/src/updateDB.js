@@ -2,6 +2,8 @@ import { CronJob } from 'cron';
 import shell from 'shelljs';
 import fs from 'fs';
 
+import { runUpdates } from './pythonClient.js';
+
 function runCommand() {
   try {
     const path = '../../../bin/scrap-fb';

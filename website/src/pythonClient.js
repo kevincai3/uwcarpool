@@ -25,4 +25,5 @@ function runUpdates() {
 
 export {
   fetchQuery,
+  runUpdates,
 };
