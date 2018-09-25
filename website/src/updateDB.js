@@ -1,5 +1,6 @@
 import { CronJob } from 'cron';
 import shell from 'shelljs';
+import fs from 'fs';
 
 function runCommand() {
   try {
