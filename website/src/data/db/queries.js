@@ -7,7 +7,6 @@ function findPosts(postType, fromLoc, toLoc, date, groups) {
     .join('derived_posts', 'posts.post_id', '=', 'derived_posts.post_id')
     .join('groups', 'posts.post_id', '=', 'groups.post_id')
     .join('trips', 'groups.group_id', '=', 'trips.group_id')
-    .where('trips.date', '>=', moment().startOf('day').toISOString())
 
   if (postType) {
     query = query.where('trips.post_type', postType);
@@ -26,6 +25,8 @@ function findPosts(postType, fromLoc, toLoc, date, groups) {
     query = query
       .where('trips.date', '>=', startOfDate.clone().format('YYYY-MM-DD'))
       .where('trips.date', '<', startOfDate.clone().add('1', 'days').format('YYYY-MM-DD'));
+  } else {
+    query = query.where('trips.date', '>=', moment().startOf('day').toISOString())
   }
 
   query = query.where('posts.source', '=', 'open_waterloo');

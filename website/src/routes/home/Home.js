@@ -26,9 +26,7 @@ class Home extends React.PureComponent {
   search = (event) => {
     event.preventDefault();
     const query = this.state.query;
-    if (query.trim() != "") {
-      history.push(`/search?q=${query}`)
-    }
+    history.push(`/search?q=${query.trim()}`)
   }
 
   render() {

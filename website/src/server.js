@@ -166,7 +166,7 @@ if (config.env === 'production') {
 //const promise = models.sync().catch(err => console.error(err.stack));
 if (!module.hot) {
   //promise.then(() => {
-    app.listen(config.port, () => {
+    app.listen(config.port, 'localhost', () => {
       console.info(`The server is running at http://localhost:${config.port}/`);
     });
   //});
