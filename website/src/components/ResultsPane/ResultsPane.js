@@ -38,7 +38,7 @@ class ResultsPane extends React.PureComponent {
       <div className={s.results_container}>
         <div className={s.legend}>
           <div className={s.legend_header}>Ridesharing Groups</div>
-          {[1].map(row => <LegendRow text={"University of Waterloo Rideshare"} color={""} />)}
+          {[1].map(row => <LegendRow key={row} text={"University of Waterloo Rideshare"} color={""} />)}
         </div>
         <div className={s.results}>
           <div style={{marginBottom: "20px"}}>
@@ -47,7 +47,7 @@ class ResultsPane extends React.PureComponent {
 
           <div>
             { posts.map(post => (
-                <ResultCard data={mapPostData(post)}/>
+                <ResultCard key={post.key} data={mapPostData(post)}/>
               ))
             }
           </div>
@@ -61,7 +61,7 @@ const GraphQLWrapper = (props) => {
   if (!('date' in props.params)) {
     return <LoadingSpinner />;
   }
-  const dateParam = props.params.date === null ? "" : props.params.date.format('Y-M-D');
+  const dateParam = props.params.date === null ? "" : props.params.date.format('Y-MM-DD');
   return (
     <Query
       query={gql`

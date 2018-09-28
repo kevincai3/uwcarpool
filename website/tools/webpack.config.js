@@ -306,7 +306,7 @@ const clientConfig = {
     // Define free variables
     // https://webpack.js.org/plugins/define-plugin/
     new webpack.DefinePlugin({
-      'process.env.BROWSER': true,
+      'process.env.NODE_BROWSER': true,
       __DEV__: isDebug,
     }),
 
@@ -470,7 +470,7 @@ const serverConfig = {
     // Define free variables
     // https://webpack.js.org/plugins/define-plugin/
     new webpack.DefinePlugin({
-      'process.env.BROWSER': false,
+      'process.env.NODE_BROWSER': false,
       __DEV__: isDebug,
     }),
 

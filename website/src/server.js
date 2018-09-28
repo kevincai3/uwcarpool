@@ -18,7 +18,6 @@ import schema from './data/schema';
 // import assets from './asset-manifest.json'; // eslint-disable-line import/no-unresolved
 import chunks from './chunk-manifest.json'; // eslint-disable-line import/no-unresolved
 import config from './config';
-import { job } from './updateDB.js';
 
 process.on('unhandledRejection', (reason, p) => {
   console.error('Unhandled Rejection at:', p, 'reason:', reason);
@@ -154,11 +153,6 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500);
   res.send(`<!doctype html>${html}`);
 });
-
-// Start updating database job
-if (config.env === 'production') {
-  job.start();
-}
 
 //
 // Launch the server

@@ -9,7 +9,7 @@ __pycache__
 *.pyo
 .ipynb_checkpoints/
 
-/build
+build/
 __snapshots__
 
 src/config.js

@@ -1,8 +1,6 @@
-import { CronJob } from 'cron';
+import { runUpdates } from '../src/pythonClient.js';
 import shell from 'shelljs';
 import fs from 'fs';
-
-import { runUpdates } from './pythonClient.js';
 
 function runCommand() {
   try {
@@ -19,9 +17,4 @@ function runCommand() {
   }
 }
 
-const job = new CronJob('* 0 * * * *', runCommand);
-
-export {
-  job,
-  runCommand,
-}
+runCommand();
