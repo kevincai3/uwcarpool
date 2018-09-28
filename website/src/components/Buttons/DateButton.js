@@ -26,7 +26,7 @@ class DateMenu extends React.PureComponent {
     return (
       <div className={s.container}>
         <DatePicker
-          selected={date || moment()}
+          selected={date}
           onChange={onChange}
           includeDates={validDates}
           startDate={isAllDates ? validDates[0] : null}
