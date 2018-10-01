@@ -58,7 +58,6 @@ app.use((req, res, next) => {
       httpOnly: true,
       maxAge: 1000000000,
     });
-    console.log(req.cookie)
   }
   next();
 });
