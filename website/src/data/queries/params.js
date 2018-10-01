@@ -6,6 +6,7 @@ import moment from 'moment';
 
 import ParamType from '../types/ParamType.js';
 import { fetchQuery } from '../../pythonClient.js';
+import { logRequest, COOKIE_NAME } from '../../logger.js';
 
 function processParam(strQuery, results) {
   return {
@@ -20,7 +21,9 @@ const params = {
   args: {
     strQuery: { type: StringType },
   },
-  resolve(req, { strQuery }) {
+  resolve({ request }, params) {
+    const { strQuery } = params;
+    logRequest(request.cookies[COOKIE_NAME], 3, params);
     return fetchQuery(strQuery)
       .then(results => processParam(strQuery, results));
   }

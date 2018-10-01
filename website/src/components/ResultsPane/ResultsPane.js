@@ -47,7 +47,7 @@ class ResultsPane extends React.PureComponent {
 
           <div>
             { posts.map(post => (
-                <ResultCard key={post.key} data={mapPostData(post)}/>
+                <ResultCard key={post.id} data={mapPostData(post)}/>
               ))
             }
           </div>

@@ -2,11 +2,12 @@ import {
   GraphQLString as StringType,
   GraphQLList as ListType,
 } from 'graphql';
+import { groupBy, uniqBy } from 'lodash';
+import moment from 'moment';
 
 import PostType from '../types/PostType.js';
 import { findPosts } from '../db/queries.js';
-import { groupBy, uniqBy } from 'lodash';
-import moment from 'moment';
+import { logRequest, COOKIE_NAME } from '../../logger.js';
 
 function buildPost(rawPosts) {
   const newestPost = rawPosts.sort((postA, postB) => postA.posttime - postB.posttime)[0];
@@ -43,7 +44,9 @@ const posts = {
     date: { type: StringType },
     groups: { type: new ListType(StringType) },
   },
-  resolve(req, {postType, fromLoc, toLoc, date, groups}) {
+  resolve({ request }, params) {
+    const {postType, fromLoc, toLoc, date, groups} = params;
+    logRequest(request.cookies[COOKIE_NAME], 2, params);
     return findPosts(postType, fromLoc, toLoc, date, groups)
       .then(processPosts);
   },

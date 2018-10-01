@@ -18,6 +18,8 @@ import schema from './data/schema';
 // import assets from './asset-manifest.json'; // eslint-disable-line import/no-unresolved
 import chunks from './chunk-manifest.json'; // eslint-disable-line import/no-unresolved
 import config from './config';
+import generateToken from './utils/generateToken.js';
+import { logRequest, COOKIE_NAME } from './logger.js';
 
 process.on('unhandledRejection', (reason, p) => {
   console.error('Unhandled Rejection at:', p, 'reason:', reason);
@@ -47,6 +49,19 @@ app.use(express.static(path.resolve(__dirname, 'public')));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+app.use((req, res, next) => {
+  if (req.cookies[COOKIE_NAME] === undefined) {
+    const token = generateToken(req)
+    req.cookies[COOKIE_NAME] = token; // App expects to find the token on the req.
+    res.cookie(COOKIE_NAME, token, {
+      httpOnly: true,
+      maxAge: 1000000000,
+    });
+    console.log(req.cookie)
+  }
+  next();
+});
 
 //
 // Register API middleware
@@ -125,6 +140,7 @@ app.get('*', async (req, res, next) => {
 
     const html = ReactDOM.renderToStaticMarkup(<Html {...data} />);
     res.status(route.status || 200);
+    logRequest(req.cookies[COOKIE_NAME], 1, {});
     res.send(`<!doctype html>${html}`);
   } catch (err) {
     next(err);
