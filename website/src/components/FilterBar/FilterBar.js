@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import PropTypes from 'prop-types';
+import { isEqual } from 'lodash';
 
 import s from './FilterBar.css';
 
@@ -29,7 +30,7 @@ class FilterBar extends React.PureComponent {
     super(props)
   }
 
-  componentDidMount() {
+  updateParent = () => {
     const { type, fromLoc, toLoc, date, groups } = this.props;
     this.props.updateFunc({
       type,
@@ -38,6 +39,18 @@ class FilterBar extends React.PureComponent {
       date,
       groups,
     })
+  }
+
+  componentDidMount() {
+    this.updateParent();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (!isEqual(
+      { ...this.props, updateFunc: undefined, date: this.props.date.format("Y-M-D") },
+      { ...prevProps, updateFunc: undefined, date: prevProps.date.format("Y-M-D") })) {
+      this.updateParent();
+    }
   }
 
   render() {

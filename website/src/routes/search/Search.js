@@ -38,7 +38,6 @@ class Search extends React.PureComponent {
 
   updateSearchBar = (event) => {
     this.setState({searchBar: event.target.value});
-
   }
 
   updateOption = (options) => {

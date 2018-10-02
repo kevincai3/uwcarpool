@@ -46,22 +46,16 @@ class SelectButton extends React.PureComponent {
 
   constructor(props) {
     super(props);
-    this.state = {
-      selected: props.selected,
-    }
   }
 
   selectedOption = (index) => {
-    const selectedArr = this.state.selected;
+    const selectedArr = this.props.selected;
     let newSelected = []
     if (this.props.selectMultiple) {
-      newSelected = xor(this.state.selected, [index])
+      newSelected = xor(this.props.selected, [index])
     } else {
       newSelected = [index]
     }
-    this.setState({
-      selected: newSelected,
-    });
     this.props.onUpdate(newSelected);
   }
 
@@ -110,8 +104,7 @@ class SelectButton extends React.PureComponent {
   }
 
   render() {
-    const { options, allText } = this.props;
-    const { selected } = this.state;
+    const { options, allText, selected } = this.props;
     const text = options.length === selected.length || selected.length === 0 ?
       allText :
       selected.map(index => options[index]).join(", ");
