@@ -1,0 +1,52 @@
+@import "../variables.css";
+
+.container {
+  padding: 15px 0;
+}
+
+.header_row {
+  display: flex;
+  font-family: var(--font-family-header);
+  cursor: pointer;
+  padding: 0px 15px;
+}
+
+.header_row:hover, .header_row:hover path {
+  color: var(--color-ocean-blue);
+}
+
+.left_column {
+  text-align: left;
+  font-size: 1.25rem;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.left_column_expanded {
+  font-size: 1.5rem;
+}
+
+.right_column {
+  text-align: right;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  color: var(--color-medium-grey);
+}
+
+.list_container {
+  width: 800px;
+  margin: 0px auto;
+}
+
+.content {
+  padding: 15px 25px;
+  line-height: 1.5rem;
+}
+
+.line {
+  width: 100%;
+  background-color: var(--color-medium-grey);
+  height: 1px;
+}

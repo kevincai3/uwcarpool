@@ -14,6 +14,7 @@
   ],
   "dependencies": {
     "@babel/polyfill": "^7.0.0-beta.51",
+    "@svgr/cli": "^3.0.0",
     "apollo-boost": "^0.1.15",
     "body-parser": "^1.18.3",
     "classnames": "^2.2.6",
@@ -173,6 +174,7 @@
     "render": "babel-node tools/run render",
     "serve": "babel-node tools/run runServer",
     "start": "babel-node tools/run start",
+    "svgr" : "svgr",
     "updateDB": "babel-node scripts/updateDB.js"
   }
 }

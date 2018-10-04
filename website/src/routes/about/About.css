@@ -1,0 +1,30 @@
+@import '../../components/variables.css';
+
+.title {
+  text-align: center;
+  margin-top: 50px;
+  color: var(--color-deep-blue);
+  font-size: 48px;
+  font-family:var(--font-family-header);
+}
+
+.text {
+  text-align: center;
+  font-family:var(--font-family-header);
+  font-size:15px;
+}
+
+.images{
+  border: 0;
+  width: 85%;
+  color: #f00;
+  background-color: #b3b3b3;
+  height: 2px;
+  margin-left: 310px;
+  margin-top: 20px;
+  margin-bottom:20px;
+}
+
+.background {
+  margin-top: 50px;
+}

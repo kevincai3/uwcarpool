@@ -19,11 +19,9 @@ class Footer extends React.PureComponent {
       <div className={s.root}>
         <hr className={s.line} />
         <div className={s.container}>
-          <Link className={s.link} to="/">
-            FAQ
-          </Link>
+          <Link className={s.link} to="/about">FAQ</Link>
           <i className={classNames("fas fa-circle", s.dot)}/>
-          <a href="mailto:blah@blah.com">Email Us</a>
+          <a href="mailto:uwaterloocarpool@gmail.com">Email Us</a>
         </div>
       </div>
     );
