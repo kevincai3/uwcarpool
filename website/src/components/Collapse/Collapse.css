@@ -2,6 +2,7 @@
 
 .container {
   padding: 15px 0;
+  position: relative;
 }
 
 .header_row {
@@ -17,14 +18,9 @@
 
 .left_column {
   text-align: left;
-  font-size: 1.25rem;
   flex: 1;
   display: flex;
   align-items: center;
-}
-
-.left_column_expanded {
-  font-size: 1.5rem;
 }
 
 .right_column {
@@ -33,15 +29,11 @@
   display: flex;
   align-items: center;
   color: var(--color-medium-grey);
-}
-
-.list_container {
-  width: 800px;
-  margin: 0px auto;
+  width: 24px;
 }
 
 .content {
-  padding: 15px 25px;
+  padding: 0 25px;
   line-height: 1.5rem;
 }
 

@@ -20,6 +20,7 @@ import chunks from './chunk-manifest.json'; // eslint-disable-line import/no-unr
 import config from './config';
 import generateToken from './utils/generateToken.js';
 import { logRequest, COOKIE_NAME } from './logger.js';
+import apiRouter from './api/api.js';
 
 process.on('unhandledRejection', (reason, p) => {
   console.error('Unhandled Rejection at:', p, 'reason:', reason);
@@ -73,6 +74,11 @@ app.use(
     rootValue: { request: req },
     pretty: __DEV__,
   })),
+);
+
+app.use(
+  '/api',
+  apiRouter
 );
 
 //

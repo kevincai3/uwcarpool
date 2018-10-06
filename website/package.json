@@ -22,6 +22,7 @@
     "express": "^4.16.3",
     "express-graphql": "^0.6.12",
     "express-jwt": "^5.3.1",
+    "googleapis": "27",
     "graphql": "^0.13.2",
     "history": "^4.7.2",
     "isomorphic-style-loader": "^4.0.0",
@@ -45,6 +46,7 @@
     "react-datepicker": "1.5.0",
     "react-dom": "^16.4.1",
     "react-slick": "^0.23.1",
+    "react-spring": "^5.9.2",
     "sequelize": "^4.37.10",
     "serialize-javascript": "^1.5.0",
     "shelljs": "^0.8.2",
@@ -174,7 +176,7 @@
     "render": "babel-node tools/run render",
     "serve": "babel-node tools/run runServer",
     "start": "babel-node tools/run start",
-    "svgr" : "svgr",
+    "svgr": "svgr",
     "updateDB": "babel-node scripts/updateDB.js"
   }
 }

@@ -12,13 +12,13 @@ import Layout from '../../components/Layout';
 import Page from '../../components/Page';
 import About from './About.js';
 
-function action() {
+function action(context) {
   return {
     title: 'UWCarpool - About',
     chunks: ['about'],
     component: (
       <Layout>
-        <About />
+        <About fetch={context.fetch}/>
       </Layout>
     ),
   };
