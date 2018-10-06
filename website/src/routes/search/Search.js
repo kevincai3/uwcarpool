@@ -9,6 +9,7 @@ import s from './Search.css';
 import Autocomplete from 'react-autocomplete';
 import ResultsPane from '../../components/ResultsPane/ResultsPane.js';
 import FilterBar from '../../components/FilterBar/FilterBar.js';
+import { LOCATIONS, TIMES, TYPES } from '../../utils/constants.js';
 
 class Search extends React.PureComponent {
   static propTypes = {
@@ -49,6 +50,29 @@ class Search extends React.PureComponent {
     });
   }
 
+  reportPost = (key, fbId) => {
+    return this.props.fetch('/api/reportpost', {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: "POST",
+      body: JSON.stringify({
+        data: {
+          key,
+          fbId,
+          query: this.state.query,
+          options: {
+            ...this.state.options,
+            fromLoc: LOCATIONS[this.state.options.fromLoc],
+            toLoc: LOCATIONS[this.state.options.toLoc],
+            type: TYPES[this.state.options.type],
+          }
+        }
+      })
+    })
+  }
+
   render() {
     const placeholderText = "Looking for ride from toronto to waterloo";
     const { query, searchBar, options } = this.state;
@@ -62,7 +86,7 @@ class Search extends React.PureComponent {
           <FilterBar strQuery={query} updateFunc={this.updateOption} />
         </div>
         <div className={s.horizontal_line} />
-        <ResultsPane params={this.state.options} query={this.state.query}/>
+        <ResultsPane reportPost={this.reportPost} params={this.state.options} query={this.state.query}/>
       </div>
     );
   }

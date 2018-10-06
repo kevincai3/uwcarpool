@@ -27,13 +27,33 @@ class LegendRow extends React.PureComponent {
   }
 }
 
-class ResultsPane extends React.PureComponent {
+class ResultsPane extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {
+      visible: 10,
+    }
+  }
+
+  componentDidMount() {
+    window.addEventListener('scroll', this.onScroll, false);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScroll, false);
+  }
+
+  onScroll = () => {
+    if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 500)) {
+      this.setState({
+        visible: Math.min(this.state.visible + 10, this.props.posts.length),
+      });
+    }
   }
 
   render() {
-    const { posts } = this.props;
+    const { posts, reportPost } = this.props;
+    const { visible } = this.state;
     return (
       <div className={s.results_container}>
         <div className={s.legend}>
@@ -46,8 +66,8 @@ class ResultsPane extends React.PureComponent {
           </div>
 
           <div>
-            { posts.map(post => (
-                <ResultCard key={post.id} data={mapPostData(post)}/>
+            { posts.slice(0, visible).map(post => (
+                <ResultCard reportPost={reportPost} key={post.id} data={mapPostData(post)}/>
               ))
             }
           </div>

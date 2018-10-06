@@ -5,6 +5,7 @@ import s from './About.css';
 
 import Layout from '../../components/Layout/Layout.js';
 import Collapse from '../../components/Collapse/Collapse.js';
+import LoadingSpinner from '../../components/Loading/LoadingSpinner.js';
 import faq from './text.js';
 
 class About extends React.Component {
@@ -16,7 +17,9 @@ class About extends React.Component {
         email: '',
         message: '',
       },
-      completedForm: false,
+      // 0 -> Default, 1 -> Error, 2 -> Sending, 3 -> Complete
+      formState: 0,
+      submission: null,
     }
   }
 
@@ -25,16 +28,18 @@ class About extends React.Component {
       form: {
         ...this.state.form,
         [name]: val
-      }
+      },
+      formState: this.formState === 1 ? 0 : this.formState,
     })
   }
 
   submitForm = (e) => {
     e.preventDefault();
     if (this.state.form.message.trim() == '') {
+      this.setState({formState: 1});
       return;
     }
-    this.props.fetch("/api/feedback", {
+    const submission = this.props.fetch("/api/feedback", {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -43,12 +48,30 @@ class About extends React.Component {
       body: JSON.stringify({
         data: this.state.form,
       })
-    }).then(() => this.setState({completedForm: true}))
+    }).then(() => {
+      if (this.state.submission !== null) {
+        this.setState({
+          formState: 3,
+          submission: null,
+        })
+      }
+    })
       .catch(err => console.log(err));
+
+    this.setState({
+      formState: 2,
+      submission,
+    });
+  }
+
+  componentWillUnmount() {
+    this.setState({
+      submission: null,
+    })
   }
 
   render (){
-    const { completedForm } = this.state;
+    const { formState } = this.state;
     const { name, email, message } = this.state.form;
     const form = (
       <form>
@@ -64,10 +87,20 @@ class About extends React.Component {
         </div>
         <div className={s.message_row}>
           <label htmlFor="message">Message: </label>
-          <textarea name="message" className={s.textarea} value={message} onChange={(e) => this.updateForm('message', e.target.value)}/>
+          <textarea name="message" className={classNames(s.textarea, (formState === 1) && s.error_textarea)} value={message} onChange={(e) => this.updateForm('message', e.target.value)}/>
         </div>
         <div className={s.submit_row}>
-          <input type="submit" className={classNames("button", s.button)} onClick={this.submitForm} />
+          <button type="submit" className={classNames("button", "dynamic_button", s.button)} disabled={formState === 2} onClick={this.submitForm}>
+            <span style={formState === 2 ? { opacity: 0 } : {}}>Submit</span>
+            {formState === 2 && <LoadingSpinner styles={{
+              margin: '0 auto',
+              width: 4,
+              height: 4,
+              fontSize: 4,
+              marginTop: -17,
+              color: 'var(--color-default-background)',
+            }}/> }
+          </button>
         </div>
       </form>
     )
@@ -82,13 +115,13 @@ class About extends React.Component {
           <div className={s.feedback}>
             <div className={s.feedback_title}>
               {
-                completedForm ?
+                formState === 3 ?
                 'Thanks for your feedback!' :
                 'Got a question? Have some suggestions? Leave us a comment!'
               }
             </div>
             {
-              completedForm ?
+              formState === 3 ?
                 null:
                 form
             }

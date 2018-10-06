@@ -23,11 +23,11 @@ class LoadingSpinner extends React.PureComponent {
   }
 
   render() {
-    let { type } = this.props
+    let { type, height, weight, styles } = this.props
     if (validStrings.indexOf(type) === -1) {
       type = validStrings[0]
     }
-    return <div className={`${type}loader`} />
+    return <div className={`${type}loader`} style={styles}/>
   }
 }
 

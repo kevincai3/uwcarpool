@@ -8,7 +8,7 @@ function action(context, params) {
     chunks: ['search'],
     component: (
       <Layout>
-        <Search query={context.query} path={context.path}/>
+        <Search fetch={context.fetch} query={context.query} path={context.path}/>
       </Layout>
     ),
   };

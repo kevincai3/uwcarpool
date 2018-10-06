@@ -1,6 +1,6 @@
 @import '../variables.css';
 
-@-webkit-keyframes :global(load7) {
+@-webkit-keyframes :global(bar_ani) {
   0%,
   80%,
   100% {
@@ -11,7 +11,7 @@
   }
 }
 
-@keyframes :global(load7) {
+@keyframes :global(bar_ani) {
   0%,
   80%,
   100% {
@@ -22,7 +22,7 @@
   }
 }
 
-@-webkit-keyframes :global(load4) {
+@-webkit-keyframes :global(circle_ani) {
   0%,
   100% {
     box-shadow: 0 -3em 0 0.2em, 2em -2em 0 0em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 0;
@@ -50,7 +50,7 @@
   }
 }
 
-@keyframes :global(load4) {
+@keyframes :global(circle_ani) {
   0%,
   100% {
     box-shadow: 0 -3em 0 0.2em, 2em -2em 0 0em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 0;
@@ -88,8 +88,8 @@
     border-radius: 50%;
     position: relative;
     text-indent: -9999em;
-    -webkit-animation: load4 1.3s infinite linear;
-    animation: load4 1.3s infinite linear;
+    -webkit-animation: circle_ani 1.3s infinite linear;
+    animation: circle_ani 1.3s infinite linear;
     -webkit-transform: translateZ(0);
     -ms-transform: translateZ(0);
     transform: translateZ(0);
@@ -101,8 +101,8 @@
     height: 2.5em;
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both;
-    -webkit-animation: load7 1.8s infinite ease-in-out;
-    animation: load7 1.8s infinite ease-in-out;
+    -webkit-animation: bar_ani 1.8s infinite ease-in-out;
+    animation: bar_ani 1.8s infinite ease-in-out;
   }
 
   .barloader {

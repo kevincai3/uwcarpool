@@ -41,6 +41,7 @@
 
 .left_header {
   flex: 1 0 auto;
+  vertical-align: center;
 }
 
 .right_header {
@@ -51,6 +52,7 @@
 .footer {
   width: 100%;
   display: flex;
+  margin-top: 5px;
   padding: 2px 8px;
 }
 
@@ -71,7 +73,7 @@
 .message {
   white-space: pre-line;
   margin-left: 5px;
-  margin-top: 3px;
+  margin-top: 5px;
 }
 
 .arrow {
@@ -92,4 +94,8 @@
 
 .cap {
   text-transform: capitalize;
+}
+
+.reported_text {
+  color: var(--color-medium-grey);
 }
