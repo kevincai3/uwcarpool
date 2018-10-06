@@ -47,8 +47,8 @@ class FilterBar extends React.PureComponent {
 
   componentDidUpdate(prevProps) {
     if (!isEqual(
-      { ...this.props, updateFunc: undefined, date: this.props.date.format("Y-M-D") },
-      { ...prevProps, updateFunc: undefined, date: prevProps.date.format("Y-M-D") })) {
+      { ...this.props, updateFunc: undefined, date: (this.props.date != null) && this.props.date.format("Y-M-D") },
+      { ...prevProps, updateFunc: undefined, date: (prevProps.date != null) && prevProps.date.format("Y-M-D") })) {
       this.updateParent();
     }
   }
