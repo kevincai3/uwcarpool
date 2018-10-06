@@ -19,7 +19,7 @@
   font-size: 0.875rem;
 }
 
-.right_column:hover, .left_column:hover {
+.highlight:hover {
   color: var(--color-sky-blue);
 }
 
