@@ -1,5 +1,3 @@
-@import '../variables.css';
-
 .root {
   position: absolute;
   bottom: 0;
@@ -29,4 +27,8 @@
   top: 8px;
   margin: 0px 12px;
   position: relative;
+}
+
+.highlight:hover {
+  color: var(--color-ocean-blue);
 }

@@ -99,3 +99,7 @@
 .reported_text {
   color: var(--color-medium-grey);
 }
+
+.container a:hover {
+  color: var(--color-ocean-blue);
+}

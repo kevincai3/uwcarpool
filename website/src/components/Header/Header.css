@@ -19,6 +19,10 @@
   font-size: 0.875rem;
 }
 
+.right_column:hover, .left_column:hover {
+  color: var(--color-sky-blue);
+}
+
 .left_column {
   font-family: var(--font-family-header) !important;
   font-size: 1.25rem;
