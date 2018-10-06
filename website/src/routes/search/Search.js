@@ -34,7 +34,10 @@ class Search extends React.PureComponent {
       return;
     }
     history.push(`${this.props.path}?q=${encodeURI(this.state.searchBar)}`, null);
-    this.setState({query: this.state.searchBar});
+    this.setState({
+      query: this.state.searchBar,
+      options: {},
+    });
   }
 
   updateSearchBar = (event) => {
@@ -83,7 +86,7 @@ class Search extends React.PureComponent {
             <input type="text" className={classNames("searchbar", s.searchbar)} placeholder={placeholderText} value={searchBar} onChange={this.updateSearchBar} />
             <input className={classNames("button", s.button)} type="submit" value="Search" />
           </form>
-          <FilterBar strQuery={query} updateFunc={this.updateOption} />
+          <FilterBar strQuery={query} updateFunc={this.updateOption} {...this.state.options} />
         </div>
         <div className={s.horizontal_line} />
         <ResultsPane reportPost={this.reportPost} params={this.state.options} query={this.state.query}/>
