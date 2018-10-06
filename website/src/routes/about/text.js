@@ -8,6 +8,6 @@ export default [{
   title: 'I can’t find my city!',
   body: 'Currently our database only contains cities in Canada that have high populations or are popular destinations for students in Waterloo. If you have a city you would like us to add, email us at uwaterloocarpool@gmail.com or use the feedback form below and we will be happy to oblige.',
 }, {
-  title: 'Your results are wrong!',
+  title: 'I found an incorrect result!',
   body: 'If you find a post that is incorrectly classified you can use the report posts button and we\'ll figure out why our magical classification algorithm is wrong. If its more than one post please email us at uwaterloocarpool@gmail.com or use the feedback form below.'
 }];
