@@ -1,6 +1,4 @@
 .results_container {
-  margin-top: 20px;
-  margin-left: 120px;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row-reverse;
@@ -39,5 +37,5 @@
 }
 
 .results {
-  flex: 1 0 auto;
+  flex: 1 1 auto;
 }

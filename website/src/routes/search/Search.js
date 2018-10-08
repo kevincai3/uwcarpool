@@ -89,7 +89,9 @@ class Search extends React.PureComponent {
           <FilterBar strQuery={query} updateFunc={this.updateOption} {...this.state.options} />
         </div>
         <div className={s.horizontal_line} />
-        <ResultsPane reportPost={this.reportPost} params={this.state.options} query={this.state.query}/>
+        <div className={s.results_container}>
+          <ResultsPane reportPost={this.reportPost} params={this.state.options} query={this.state.query}/>
+        </div>
       </div>
     );
   }

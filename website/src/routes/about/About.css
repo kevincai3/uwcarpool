@@ -33,6 +33,7 @@
   flex: 1;
   display: flex;
   margin: 5px;
+  align-items: center;
 }
 
 .input_box {
@@ -49,7 +50,6 @@
   margin: 5px 5px;
   resize: none;
   flex: 1;
-  border-color: #cccccc;
   height: 5rem;
 }
 

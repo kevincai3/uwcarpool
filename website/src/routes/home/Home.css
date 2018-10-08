@@ -40,7 +40,6 @@
 
 .searchbar {
   margin-right: 20px;
-  height: 3rem;
   margin: 10px 10px;
 }
 
@@ -58,4 +57,15 @@
 
 .phrase {
   outline: none;
+}
+
+@media (max-width: 500px) {
+  .text {
+    font-size: 2.5rem;
+    top: 20vh;
+  }
+
+  .input_form {
+    top: 20vh;
+  }
 }

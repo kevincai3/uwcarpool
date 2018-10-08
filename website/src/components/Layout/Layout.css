@@ -6,7 +6,8 @@
 }
 
 .content {
-  padding-bottom: var(--footer-height);
+  padding: 0 10px;
+  padding-bottom: calc(var(--footer-height) + 10px);
 }
 
 hr {
