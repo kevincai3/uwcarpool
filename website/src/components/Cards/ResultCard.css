@@ -33,6 +33,7 @@
   color: var(--color-white-blue);
   font-weight: 600;
   letter-spacing: 0.6px;
+  align-items: center;
 }
 
 .body {
@@ -41,7 +42,6 @@
 
 .left_header {
   flex: 1 0 auto;
-  vertical-align: center;
 }
 
 .right_header {
@@ -83,8 +83,6 @@
 
 .icon {
   font-size: 1.125rem;
-  position: relative;
-  top: 1px;
 }
 
 .more_lines {

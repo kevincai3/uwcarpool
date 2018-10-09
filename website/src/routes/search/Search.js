@@ -82,7 +82,7 @@ class Search extends React.PureComponent {
     return (
       <div className={s.container}>
         <div className={s.top_container}>
-          <form onSubmit={this.updateQuery}>
+          <form className={s.form} onSubmit={this.updateQuery}>
             <input type="text" className={classNames("searchbar", s.searchbar)} placeholder={placeholderText} value={searchBar} onChange={this.updateSearchBar} />
             <input className={classNames("button", s.button)} type="submit" value="Search" />
           </form>

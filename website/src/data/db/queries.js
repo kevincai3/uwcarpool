@@ -26,6 +26,7 @@ function findPosts(postType, fromLoc, toLoc, date, groups) {
       .where('trips.date', '>=', startOfDate.clone().format('YYYY-MM-DD'))
       .where('trips.date', '<', startOfDate.clone().add('1', 'days').format('YYYY-MM-DD'));
   } else {
+    // TODO: Since the client doesn't send back a date, its possible that 'today' for server isn't 'today' for browser.
     query = query.where('trips.date', '>=', moment().startOf('day').toISOString())
   }
 

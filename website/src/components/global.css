@@ -67,12 +67,15 @@
 
   .button {
     border-radius: 3px;
-    margin: 10px 10px;
     padding: 0.3rem 1.3rem;
   }
 
   .button:hover {
     background-color: var(--color-deep-blue);
+  }
+
+  .btn-reg {
+    margin: 10px 10px;
   }
 
   .dynamic_button {

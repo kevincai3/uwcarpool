@@ -86,14 +86,14 @@ class ResultCard extends React.PureComponent {
         </div>
         <div className={s.body}>
           <div className={s.header}>
+            <i className={classNames(`fas ${ type == 1 ? 'fa-car' : 'fa-binoculars' }`, s.pad_right, s.icon)} />
             <div className={s.left_header}>
-              <i className={classNames(`fas ${ type == 1 ? 'fa-car' : 'fa-binoculars' }`, s.pad_right, s.icon)} />
               <span className={classNames(s.pad_right, s.cap)}>{startText}</span>
               <img className={classNames(s.pad_right, s.arrow)} src={arrowUrl} />
               <span className={s.cap}>{endText}</span>
             </div>
             <div className={s.right_header}>
-              <span style={{verticalAlign: 'middle'}}>{dateText}{/*, {timeText}*/}</span>
+              <span>{dateText}{/*, {timeText}*/}</span>
             </div>
           </div>
           <div className={s.message}>

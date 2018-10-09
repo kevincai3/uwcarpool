@@ -1,15 +1,24 @@
 .filter_row {
   margin-left: -5px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.filter_row > * {
+  margin-top: 10px;
 }
 
 .label {
   font-weight: 600;
-  margin: 0px 5px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 .vertical_line {
   border-left: 1px solid var(--color-deep-blue);
-  margin: 0px 5px;
   padding: 10px 0px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 

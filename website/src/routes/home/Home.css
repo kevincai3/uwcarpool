@@ -33,14 +33,14 @@
   position: relative;
   top: 30vh;
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
-  margin-bottom: 200px;
+  margin: 0 10px;
+  margin-bottom: 150px;
 }
 
 .searchbar {
-  margin-right: 20px;
-  margin: 10px 10px;
+  margin-right: 10px;
+  flex: 0 1 auto;
 }
 
 .button {
