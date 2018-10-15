@@ -6,7 +6,7 @@ import s from './About.css';
 import Layout from '../../components/Layout/Layout.js';
 import Collapse from '../../components/Collapse/Collapse.js';
 import LoadingSpinner from '../../components/Loading/LoadingSpinner.js';
-import faq from './text.js';
+import faq from './faq.js';
 
 class About extends React.Component {
   constructor(props) {
