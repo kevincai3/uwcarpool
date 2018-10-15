@@ -26,6 +26,7 @@ function buildPost(rawPosts) {
     body: newestPost.clean_message,
     date: moment(newestPost.date).format(),
     time: newestPost.time,
+    postDate: newestPost.posttime.toUTCString(),
     groups,
   }
 }

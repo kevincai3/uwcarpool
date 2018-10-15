@@ -30,7 +30,7 @@ class Home extends React.PureComponent {
   }
 
   render() {
-    const placeholderText = "Waterloo to Toronto Tomorrow";
+    const placeholderText = "i.e. Waterloo to Toronto Tomorrow";
     const query = this.state.query;
     const sliderSettings = {
       slidesToShow: 1,

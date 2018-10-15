@@ -12,12 +12,6 @@ import Arrow from './Line.js';
 import LoadingSpinner from '../Loading/LoadingSpinner.js';
 import DropdownLink from '../Link/DropdownLink.js';
 
-const ORDER = {
-  "open_waterloo" : 1,
-  "closed_waterloo" : 3,
-  "closed_laurier" : 2,
-};
-
 class ResultCard extends React.PureComponent {
   static defaultProps = {
     defaultText: '----'
@@ -64,9 +58,9 @@ class ResultCard extends React.PureComponent {
 
   render() {
     const {
-      type, start, end, defaultText, date, time, groups, message, fbId
+      type, start, end, defaultText, date, time, groups, message, fbId, postDate
     } = this.props.data;
-    const sortedGroups = sortBy(groups, group => ORDER[group.id]);
+    const sortedGroups = sortBy(groups, group => LEGEND[group.id].order);
     const availableGroups = sortedGroups.map(group => group.id);
     const { reportPost } = this.props;
     const { willOverflow, reportState } = this.state;
@@ -111,6 +105,9 @@ class ResultCard extends React.PureComponent {
           </div>
           <div className={s.message}>
             {message}
+            <div className={s.info_bar}>
+              <span>Posted on {moment(postDate).format("MMM D")}</span>
+            </div>
           </div>
           <div className={s.footer}>
             <div className={s.left_footer}>

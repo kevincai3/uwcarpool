@@ -9,6 +9,7 @@ import s from './Search.css';
 import Autocomplete from 'react-autocomplete';
 import ResultsPane from '../../components/ResultsPane/ResultsPane.js';
 import FilterBar from '../../components/FilterBar/FilterBar.js';
+import SortBar from '../../components/Sort/SortBar.js';
 import { LOCATIONS, TIMES, TYPES } from '../../utils/constants.js';
 
 class Search extends React.PureComponent {
@@ -25,6 +26,7 @@ class Search extends React.PureComponent {
       query: this.props.query.q || "",
       searchBar: this.props.query.q || "",
       options: {},
+      order: [0],
     }
   }
 
@@ -53,6 +55,10 @@ class Search extends React.PureComponent {
     });
   }
 
+  updateOrdering = (order) => {
+    this.setState({order});
+  }
+
   reportPost = (key, fbId) => {
     return this.props.fetch('/api/reportpost', {
       headers: {
@@ -77,8 +83,8 @@ class Search extends React.PureComponent {
   }
 
   render() {
-    const placeholderText = "Waterloo to Toronto Tomorrow";
-    const { query, searchBar, options } = this.state;
+    const placeholderText = "i.e. Waterloo to Toronto Tomorrow";
+    const { query, searchBar, options, order } = this.state;
     return (
       <div className={s.container}>
         <div className={s.top_container}>
@@ -90,7 +96,8 @@ class Search extends React.PureComponent {
         </div>
         <div className={s.horizontal_line} />
         <div className={s.results_container}>
-          <ResultsPane reportPost={this.reportPost} params={this.state.options} query={this.state.query}/>
+          <SortBar selected={ order } onUpdate={this.updateOrdering} />
+          <ResultsPane reportPost={this.reportPost} params={this.state.options} query={this.state.query} sortOrder={order[0]}/>
         </div>
       </div>
     );

@@ -85,6 +85,7 @@ class DateButton extends React.PureComponent {
           setAllDate: () => this.setAllDate(),
         }}
         text={date === null ? "All Days" : date.format("MMMM D")}
+        type="button"
       />
     )
   }

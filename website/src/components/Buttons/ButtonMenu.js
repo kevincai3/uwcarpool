@@ -53,13 +53,15 @@ class ButtonMenu extends React.PureComponent {
   }
 
   render() {
-    const { Element, passThrough, text } = this.props;
+    const { Element, passThrough, text, type } = this.props;
     const { expanded } = this.state;
     return (
       <div className={s.container} ref={node => this.node = node}>
         <button
           className={classNames("button", s.button, {
             [s.button_selected]: expanded,
+            [s.button_type]: type === 'button',
+            [s.line_type]: type === 'line',
           })}
           onClick={this.toggleMenu}
           type=""

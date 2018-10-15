@@ -40,11 +40,13 @@ class SelectButton extends React.PureComponent {
     selectedMultiple: PropTypes.bool,
     allText: PropTypes.string,
     onUpdate: PropTypes.func.isRequired,
+    type: PropTypes.string,
   }
 
   static defaultProps = {
     selectMultiple: false,
     allText: "All",
+    type: "button",
   }
 
   constructor(props) {
@@ -107,10 +109,12 @@ class SelectButton extends React.PureComponent {
   }
 
   render() {
-    const { options, allText, selected } = this.props;
+    const { options, allText, selected, type } = this.props;
     const text = options.length === selected.length || selected.length === 0 ?
       allText :
-      selected.map(index => options[index]).join(", ");
+      selected.map((selectedIndex, index) =>
+        <span>{options[selectedIndex]}{ index !== (selected.length - 1) && ", " }</span>
+      );
 
     return (
       <ButtonMenu
@@ -123,6 +127,7 @@ class SelectButton extends React.PureComponent {
         }}
         text={text}
         keepOpen={this.props.selectMultiple}
+        type={type}
         />
     )
   }

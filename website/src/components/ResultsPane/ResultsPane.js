@@ -3,7 +3,8 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import classNames from 'classnames';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
-import { filter, intersection } from 'lodash';
+import { filter, intersection, sortBy } from 'lodash';
+import moment from 'moment';
 
 import s from './ResultsPane.css';
 
@@ -32,13 +33,30 @@ function transformToID(groups) {
   if (groups.length == 0) {
     return CANONICAL_GROUPS;
   } else {
-    return groups.map(groupIndex => CANONICAL_GROUPS[groupIndex]);
+    return groups.sort().map(groupIndex => CANONICAL_GROUPS[groupIndex]);
   }
 }
 
 function isValidPost(post, groups) {
   const postGroups = post.groups.map(group => group.name);
   return (intersection(groups, postGroups)).length > 0;
+}
+
+function sortPosts(posts, sortOrder) {
+  let sortFunc = undefined;
+  if (sortOrder === 0) {
+    // TODO: Assuming the first post is the lowest one
+    sortFunc = (post => LEGEND[post.groups[0].name].order);
+  } else if (sortOrder === 1) {
+    sortFunc = (post => moment(post.postDate).unix() * -1);
+  } else if (sortOrder === 2) {
+    sortFunc = (post => moment(post.postDate).unix());
+  }
+  if (sortFunc) {
+    return sortBy(posts, sortFunc);
+  } else {
+    return posts;
+  }
 }
 
 class ResultsPane extends React.Component {
@@ -66,10 +84,11 @@ class ResultsPane extends React.Component {
   }
 
   render() {
-    const { posts, reportPost } = this.props;
+    const { posts, reportPost, sortOrder } = this.props;
     const { visible } = this.state;
     const validGroups = transformToID(this.props.params.groups);
     const validPosts = filter(posts, post => isValidPost(post, validGroups));
+    const sortedPosts = sortPosts(validPosts, sortOrder);
     return (
       <div className={s.results_container}>
         <div className={s.legend}>
@@ -77,12 +96,12 @@ class ResultsPane extends React.Component {
           {validGroups.map(row => <LegendRow key={row} text={LEGEND[row].label} color={LEGEND[row].color} />)}
         </div>
         <div className={s.results}>
-          <div style={{marginBottom: "20px"}}>
-            {validPosts.length} Result{validPosts.length == 1 ? '' : 's'} Found
+          <div className={s.results_count}>
+            {sortedPosts.length} Result{sortedPosts.length == 1 ? '' : 's'} Found
           </div>
 
           <div>
-            { validPosts.slice(0, visible).map(post => (
+            { sortedPosts.slice(0, visible).map(post => (
                 <ResultCard reportPost={reportPost} key={post.id} data={mapPostData(post)}/>
               ))
             }
@@ -95,7 +114,7 @@ class ResultsPane extends React.Component {
 
 const GraphQLWrapper = (props) => {
   if (!('date' in props.params)) {
-    return <LoadingSpinner />;
+    return null;
   }
   const dateParam = props.params.date === null ? "" : props.params.date.format('Y-MM-DD');
   return (
@@ -110,6 +129,7 @@ const GraphQLWrapper = (props) => {
             body
             date
             time
+            postDate
             groups {
               name
               postLink

@@ -65,14 +65,14 @@ const TIMES = [
 
 const GROUPS = [
   'Waterloo Open',
-  'Waterloo Closed',
   'Laurier Closed',
+  'Waterloo Closed',
 ];
 
 const CANONICAL_GROUPS = [
   'open_waterloo',
-  'closed_waterloo',
   'closed_laurier',
+  'closed_waterloo',
 ]
 
 const LEGEND = {
@@ -80,18 +80,43 @@ const LEGEND = {
     label: 'University of Waterloo Rideshare (Public)',
     color: '#0D995B',
     shortform: 'Waterloo Open',
-  },
-  'closed_waterloo': {
-    label: 'Rideshare Wilfrid Laurier (Need admin approval)',
-    color: '#DA0C0C',
-    shortform: 'Waterloo Closed',
+    order: 1,
   },
   'closed_laurier': {
+    label: 'Rideshare Wilfrid Laurier (Need admin approval)',
+    color: '#DA0C0C',
+    shortform: 'Laurier Closed',
+    order: 2,
+  },
+  'closed_waterloo': {
     label: 'University of Waterloo Carpool (Need @edu.uwaterloo.ca email)',
     color: '#7C0CEE',
-    shortform: 'Laurier Closed',
+    shortform: 'Waterloo Closed',
+    order: 3,
   }
 };
+
+// TODO: Fix the sortPosts function in ResultsPane before modifiying.
+const SORT_OPTIONS = [
+  {
+    label: 'Group',
+    order: 0,
+  }, {
+    label: 'Post Time',
+    order: 1,
+  }, {
+    label: 'Post Time',
+    order: 2,
+    /*
+    label: 'Time of Day',
+    order: 1,
+  }, {
+    label: 'Time of Day',
+    order: 2,
+  }, {
+  */
+  }
+];
 
 export {
   TYPES,
@@ -102,4 +127,5 @@ export {
   GROUPS,
   CANONICAL_GROUPS,
   LEGEND,
+  SORT_OPTIONS,
 };

@@ -12,6 +12,7 @@ function mapPostData(postData) {
     date: postData.date || '',
     time: postData.time || '',
     message: postData.body,
+    postDate: postData.postDate,
     groups: postData.groups.map(group => ({
       postLink: group.postLink,
       id: group.name,

@@ -4,7 +4,7 @@
   display: flex;
   box-shadow: 3px 4px 4px 0px rgba(0, 0, 0, .3);
   font-size: .875rem;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   margin-right: 20px;
 }
 
@@ -60,7 +60,7 @@
 .footer {
   width: 100%;
   display: flex;
-  margin-top: 20px;
+  margin-top: 10px;
   padding: 0 8px 5px 8px;
   align-items: center;
 }
@@ -82,7 +82,7 @@
 
 .message {
   white-space: pre-line;
-  margin: 7px 7px 0 7px;
+  margin: 10px 7px 0 7px;
 }
 
 .arrow {
@@ -142,4 +142,13 @@
   grid-gap: 5px;
   flex: 1 1 auto;
   margin-right: 5px;
+}
+
+.info_bar {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 3px;
+  color: var(--color-medium-grey);
+  font-weight: 600;
+  font-size: .875rem;
 }

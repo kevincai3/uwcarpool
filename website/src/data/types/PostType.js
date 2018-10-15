@@ -18,6 +18,7 @@ const PostType = new ObjectType({
     body: { type: StringType },
     date: { type: StringType },
     time: { type: StringType },
+    postDate: { type: StringType },
     groups: { type: new NonNull(new ListType(new NonNull(GroupType))) }
   },
 })
