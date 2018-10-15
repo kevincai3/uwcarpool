@@ -12,7 +12,10 @@ function mapPostData(postData) {
     date: postData.date || '',
     time: postData.time || '',
     message: postData.body,
-    groups: postData.groups.map(group => mapGroupToID(group.name)),
+    groups: postData.groups.map(group => ({
+      postLink: group.postLink,
+      id: group.name,
+    })),
     fbId: postData.groups[0].postLink,
   }
 }
@@ -29,9 +32,9 @@ function mapGroupToID(groupName) {
 function groupIDToURL(groupId) {
   const base = 'facebook.com/groups/';
   const mapping = {
-    '1': '225049564330328',
-    '2': '372772186164295',
-    '3': '372772186164295',
+    'open_waterloo': '225049564330328',
+    'closed_waterloo': '372772186164295',
+    'closed_laurier': '372772186164295',
   }
   return base + (mapping[groupId] || "");
 }

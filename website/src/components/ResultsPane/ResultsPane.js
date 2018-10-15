@@ -3,13 +3,14 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import classNames from 'classnames';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
-import { mapPostData } from '../../utils/mappings.js';
+import { filter, intersection } from 'lodash';
 
 import s from './ResultsPane.css';
 
+import { mapPostData } from '../../utils/mappings.js';
 import ResultCard from '../Cards/ResultCard.js';
 import LoadingSpinner from '../Loading/LoadingSpinner.js';
-import { CANONICAL_TYPES, CANONICAL_LOCATIONS } from '../../utils/constants.js';
+import { CANONICAL_TYPES, CANONICAL_LOCATIONS, CANONICAL_GROUPS, LEGEND } from '../../utils/constants.js';
 
 class LegendRow extends React.PureComponent {
   constructor(props) {
@@ -20,11 +21,24 @@ class LegendRow extends React.PureComponent {
     const { text, color } = this.props;
     return (
       <div className={s.legend_row}>
-        <div className={classNames(s.color_square)}></div>
-        <span style={{verticalAlign: 'middle'}}>{text}</span>
+        <div style={{backgroundColor: color}} className={classNames(s.color_square)}></div>
+        <span>{text}</span>
       </div>
     )
   }
+}
+
+function transformToID(groups) {
+  if (groups.length == 0) {
+    return CANONICAL_GROUPS;
+  } else {
+    return groups.map(groupIndex => CANONICAL_GROUPS[groupIndex]);
+  }
+}
+
+function isValidPost(post, groups) {
+  const postGroups = post.groups.map(group => group.name);
+  return (intersection(groups, postGroups)).length > 0;
 }
 
 class ResultsPane extends React.Component {
@@ -54,19 +68,21 @@ class ResultsPane extends React.Component {
   render() {
     const { posts, reportPost } = this.props;
     const { visible } = this.state;
+    const validGroups = transformToID(this.props.params.groups);
+    const validPosts = filter(posts, post => isValidPost(post, validGroups));
     return (
       <div className={s.results_container}>
         <div className={s.legend}>
           <div className={s.legend_header}>Ridesharing Groups</div>
-          {[1].map(row => <LegendRow key={row} text={"University of Waterloo Rideshare"} color={""} />)}
+          {validGroups.map(row => <LegendRow key={row} text={LEGEND[row].label} color={LEGEND[row].color} />)}
         </div>
         <div className={s.results}>
           <div style={{marginBottom: "20px"}}>
-            {posts.length} Result{posts.length == 1 ? '' : 's'} Found
+            {validPosts.length} Result{validPosts.length == 1 ? '' : 's'} Found
           </div>
 
           <div>
-            { posts.slice(0, visible).map(post => (
+            { validPosts.slice(0, visible).map(post => (
                 <ResultCard reportPost={reportPost} key={post.id} data={mapPostData(post)}/>
               ))
             }

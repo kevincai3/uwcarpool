@@ -13,13 +13,16 @@ class SelectMenu extends React.PureComponent {
   }
 
   render() {
-    const { selected, options, clicked, keyUp } = this.props;
+    const { selected, options, clicked, keyUp, toggleOpen } = this.props;
     const selectItems = options.map((item, index) =>
       <div key={index}
         className={classNames(s.select_element, {
           [s.selected]: selected.includes(index),
         })} 
-        onClick={() => clicked(index)}
+        onClick={() => {
+          clicked(index);
+          toggleOpen(false);
+        }}
       >{item}</div>
     )
     return (

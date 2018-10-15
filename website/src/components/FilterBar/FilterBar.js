@@ -61,13 +61,12 @@ class FilterBar extends React.PureComponent {
         <SelectButton options={LOCATIONS} selected={fromLoc} onUpdate={(newVal) => updateFunc({ fromLoc: newVal })} />
         <span className={s.label}>to</span>
         <SelectButton options={LOCATIONS} selected={toLoc} onUpdate={(newVal) => updateFunc({ toLoc: newVal })} />
-        <span className={s.vertical_line} />
         <DateButton date={date} onUpdate={(newVal) => updateFunc({ date: newVal })} />
         {/*
         <SelectButton options={TIMES} selected={time} onUpdate={(newVal) => updateFunc({ time: newVal })} />
+        */}
         <span className={s.vertical_line} />
         <SelectButton options={GROUPS} selected={groups} selectMultiple={true} allText="All Groups" onUpdate={(newVal) => updateFunc({ groups: newVal })} />
-        */}
       </div>
     )
   }

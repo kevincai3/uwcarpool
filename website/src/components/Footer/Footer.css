@@ -1,12 +1,12 @@
 .root {
   position: absolute;
   bottom: 0;
+  width: 100%;
 }
 
 .container {
   margin: 0 auto;
   padding: 20px 15px;
-  width: 100vw;
   text-align: center;
   color: var(--color-dark-black);
   display: flex;
@@ -29,6 +29,9 @@
   position: relative;
 }
 
-.highlight:hover {
-  color: var(--color-ocean-blue);
+
+@media (hover:hover), (-moz-touch-enabled: 0) {
+  .highlight:hover {
+    color: var(--color-ocean-blue);
+  }
 }

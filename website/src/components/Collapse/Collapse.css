@@ -12,8 +12,10 @@
   padding: 0px 15px;
 }
 
-.header_row:hover, .header_row:hover path {
-  color: var(--color-ocean-blue);
+@media (hover:hover), (-moz-touch-enabled: 0) {
+  .header_row:hover, .header_row:hover path {
+    color: var(--color-ocean-blue);
+  }
 }
 
 .left_column {

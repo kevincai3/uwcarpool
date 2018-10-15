@@ -36,6 +36,14 @@ class ButtonMenu extends React.PureComponent {
     }
   }
 
+  toggleOpen = (open) => {
+    if (!this.props.keepOpen) {
+      this.setState({
+        expanded: open,
+      })
+    }
+  }
+
   componentDidMount() {
     document.addEventListener('mousedown', this.handleClickedOutside);
   }
@@ -62,7 +70,7 @@ class ButtonMenu extends React.PureComponent {
                 <div className={s.inner_triangle} />
               </div>
               <div className={s.element_wrapper}>
-                <Element {...passThrough} />
+                <Element {...passThrough} toggleOpen={this.toggleOpen}/>
               </div>
             </div>) :
             null

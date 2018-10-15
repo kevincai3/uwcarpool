@@ -29,8 +29,10 @@
   cursor: pointer;
 }
 
-.select_element:hover {
-  background-color: var(--color-medium-blue);
+@media (hover:hover), (-moz-touch-enabled: 0) {
+  .select_element:hover {
+    background-color: var(--color-medium-blue);
+  }
 }
 
 .selected {

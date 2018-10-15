@@ -4,7 +4,14 @@
   display: flex;
   box-shadow: 3px 4px 4px 0px rgba(0, 0, 0, .3);
   font-size: .875rem;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  margin-right: 20px;
+}
+
+@media (max-width: 500px) {
+  .container {
+    margin-right: 0;
+  }
 }
 
 .vertical_bar {
@@ -18,7 +25,6 @@
   flex: 1 1 0;
   height: 100%;
   width: 100%;
-  background-color: red;
 }
 
 .pad_right {
@@ -29,7 +35,7 @@
   background-color: var(--color-ocean-blue);
   width: 100%;
   display: flex;
-  padding: 8px 13px;
+  padding: 10px 13px;
   color: var(--color-white-blue);
   font-weight: 600;
   letter-spacing: 0.6px;
@@ -42,6 +48,8 @@
 
 .left_header {
   flex: 1 0 auto;
+  display: flex;
+  align-items: center;
 }
 
 .right_header {
@@ -52,19 +60,21 @@
 .footer {
   width: 100%;
   display: flex;
-  margin-top: 5px;
-  padding: 2px 8px;
+  margin-top: 20px;
+  padding: 0 8px 5px 8px;
+  align-items: center;
 }
 
 .left_footer {
-  flex: 1 0 auto;
-  font-size: .75rem;
+  flex: 1 1 auto;
   font-weight: 600;
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .right_footer {
-  flex: 1 0 auto;
+  flex: 0 0 auto;
   text-align: right;
   color: var(--color-deep-blue);
   font-weight: 600;
@@ -72,13 +82,11 @@
 
 .message {
   white-space: pre-line;
-  margin-left: 5px;
-  margin-top: 5px;
+  margin: 7px 7px 0 7px;
 }
 
 .arrow {
-  position: relative;
-  top: -1px;
+  width: 30px;
 }
 
 .icon {
@@ -98,6 +106,40 @@
   color: var(--color-medium-grey);
 }
 
-.container a:hover {
-  color: var(--color-ocean-blue);
+@media (hover:hover), (-moz-touch-enabled: 0) {
+  .right_footer a:hover {
+    color: var(--color-medium-blue);
+  }
+
+  .link:hover {
+    opacity: 0.5;
+  }
+}
+
+.view_on {
+  font-weight: 700;
+  flex: 0 0 auto;
+  margin-right: 5px;
+}
+
+.link {
+  white-space: nowrap;
+  padding: 2px 0;
+  display: inline-flex;
+  align-items: center;
+}
+
+.badge {
+  width: 10px;
+  height: 10px;
+  margin-right: 5px;
+  border-radius: 3px;
+}
+
+.link_container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 130px);
+  grid-gap: 5px;
+  flex: 1 1 auto;
+  margin-right: 5px;
 }

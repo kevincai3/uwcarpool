@@ -70,8 +70,10 @@
     padding: 0.3rem 1.3rem;
   }
 
-  .button:hover {
-    background-color: var(--color-deep-blue);
+  @media (hover:hover), (-moz-touch-enabled: 0) {
+    .button:hover {
+      background-color: var(--color-deep-blue);
+    }
   }
 
   .btn-reg {

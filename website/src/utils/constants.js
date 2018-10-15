@@ -69,6 +69,30 @@ const GROUPS = [
   'Laurier Closed',
 ];
 
+const CANONICAL_GROUPS = [
+  'open_waterloo',
+  'closed_waterloo',
+  'closed_laurier',
+]
+
+const LEGEND = {
+  'open_waterloo': {
+    label: 'University of Waterloo Rideshare (Public)',
+    color: '#0D995B',
+    shortform: 'Waterloo Open',
+  },
+  'closed_waterloo': {
+    label: 'Rideshare Wilfrid Laurier (Need admin approval)',
+    color: '#DA0C0C',
+    shortform: 'Waterloo Closed',
+  },
+  'closed_laurier': {
+    label: 'University of Waterloo Carpool (Need @edu.uwaterloo.ca email)',
+    color: '#7C0CEE',
+    shortform: 'Laurier Closed',
+  }
+};
+
 export {
   TYPES,
   CANONICAL_TYPES,
@@ -76,4 +100,6 @@ export {
   CANONICAL_LOCATIONS,
   TIMES,
   GROUPS,
+  CANONICAL_GROUPS,
+  LEGEND,
 };

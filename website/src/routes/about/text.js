@@ -3,7 +3,7 @@ export default [{
   body: 'UW Carpool lets you search for posts of people offering or looking for carpools in the University of Waterloo Carpool and Rideshare Wilfrid Laurier (Still in progress) Facebook groups.',
 }, {
   title: 'How do I search for a carpool?',
-  body: "Just type what you're looking for in the search bar, and we'll show you all the posts that match what you're looking for. If you want a more detailed search, you can use the filters on the search page to narrow down what you're looing for",
+  body: "Just type what you're looking for in the search bar, and we'll show you all the posts that match what you're looking for. If you want a more detailed search, you can use the filters on the search page to narrow down what you're looing for.",
 }, {
   title: "I'm not getting what I searched!",
   body: "Based on your search and our data, we try as closely as possible to return results that match. If we couldn't match your request exactly, we return as many results as we can, and allow you to use the filters to narrow down the search from there.",

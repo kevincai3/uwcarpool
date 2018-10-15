@@ -1,0 +1,47 @@
+.triangle {
+  border-left: 6px dotted transparent;
+  border-right: 6px dotted transparent;
+  display: inline-block;
+  margin-left: 5px;
+}
+
+@media (hover:hover), (-moz-touch-enabled: 0) {
+  .triangle:hover {
+    cursor: pointer;
+  }
+}
+
+.triangle_up {
+  border-bottom: 6px solid black;
+}
+
+.triangle_down {
+  border-top: 6px solid black;
+}
+
+.base {
+  display: flex;
+  align-items: center;
+}
+
+.container {
+  padding: 0 5px;
+  position: relative;
+}
+
+.dropdown_container {
+  position: absolute;
+  z-index: 5;
+  background-color: white;
+  margin: 5px;
+  border: solid 1px black;
+  right: 0;
+}
+
+.dropdown_container > *:not(:last-child) {
+  border-bottom: solid 1px black;
+}
+
+.dropdown_item {
+  padding: 5px;
+}

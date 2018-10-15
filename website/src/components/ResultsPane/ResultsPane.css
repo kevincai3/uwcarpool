@@ -9,20 +9,29 @@
 .color_square {
   height: 18px;
   width: 18px;
+  border-radius: 5px;
   display: inline-block;
-  background-color: red;
   margin-right: 10px;
   vertical-align: middle;
+  flex: 0 0 auto;
 }
 
 .legend {
   background-color: rgba(133, 133, 133, 0.08);
   display: inline-block;
   padding: 10px 50px 10px 20px;
-  flex: 0 0 auto;
+  flex: 0 1 auto;
   height: fit-content;
   margin-right: 30px;
   margin-bottom: 10px;
+  max-width: 400px;
+}
+
+@media (max-width: 500px) {
+  .legend {
+    margin-right: 0;
+    padding: 5px;
+  }
 }
 
 .legend_header {
@@ -34,6 +43,9 @@
 .legend_row {
   font-size: .875rem;
   vertical-align: middle;
+  padding-bottom: 5px;
+  display: flex;
+  align-items: center;
 }
 
 .results {

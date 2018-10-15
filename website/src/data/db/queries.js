@@ -30,7 +30,7 @@ function findPosts(postType, fromLoc, toLoc, date, groups) {
     query = query.where('trips.date', '>=', moment().startOf('day').toISOString())
   }
 
-  query = query.where('posts.source', '=', 'open_waterloo');
+  //query = query.where('posts.source', '=', 'open_waterloo');
 
   return query.select([
     'posts.post_id',

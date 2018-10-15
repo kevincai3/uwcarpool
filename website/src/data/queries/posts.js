@@ -10,7 +10,8 @@ import { findPosts } from '../db/queries.js';
 import { logRequest, COOKIE_NAME } from '../../logger.js';
 
 function buildPost(rawPosts) {
-  const newestPost = rawPosts.sort((postA, postB) => postA.posttime - postB.posttime)[0];
+  const sortedPosts = rawPosts.sort((postA, postB) => postA.posttime - postB.posttime);
+  const newestPost = sortedPosts[0];
   const groups = uniqBy(rawPosts.map(post => ({
     postLink: post.fbid,
     name: post.source,

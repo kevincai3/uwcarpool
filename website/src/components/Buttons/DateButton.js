@@ -20,14 +20,17 @@ class DateMenu extends React.PureComponent {
   }
 
   render() {
-    const {date, onChange, setAllDate} = this.props;
+    const {date, onChange, setAllDate, toggleOpen} = this.props;
     const isAllDates = date === null
     const validDates = range(0, 8).map(offset => moment().add(offset, "days"));
     return (
       <div className={s.container}>
         <DatePicker
           selected={date}
-          onChange={onChange}
+          onChange={(date) => {
+            onChange(date);
+            toggleOpen(false);
+          }}
           includeDates={validDates}
           startDate={isAllDates ? validDates[0] : null}
           endDate={isAllDates ? validDates[7] : null}
@@ -36,7 +39,10 @@ class DateMenu extends React.PureComponent {
           className={
             classNames('react-datepicker__today-button',
               s.all_dates_button)}
-          onClick={setAllDate}
+            onClick={(date) => {
+              setAllDate();
+              toggleOpen(false);
+            }}
           type="">Any Date</button>
       </div>
     )

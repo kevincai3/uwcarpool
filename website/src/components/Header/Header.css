@@ -19,8 +19,10 @@
   font-size: 0.875rem;
 }
 
-.highlight:hover {
-  color: var(--color-sky-blue);
+@media (hover:hover), (-moz-touch-enabled: 0) {
+  .highlight:hover {
+    color: var(--color-sky-blue);
+  }
 }
 
 .left_column {
