@@ -17,6 +17,9 @@ stopset.discard('from')
 
 lemma = WordNetLemmatizer()
 
+# default -> Only rewrites symbols, does not touch words (with 1 exception).
+# modify -> Modifies words, but should keep semantic meaning intact.
+# remove_extra -> Removes symbols that makes detection difficult. May change meaning.
 def process(message, modify=True, remove_extra=True):
     m = message.lower()
     m = clean_message(m, ' ')
@@ -43,7 +46,7 @@ def replace_symbols(message):
     m = re.sub(r"[-=]*>+", r' to ', m) #replace arrow (->) with to
     m = re.sub(r"<+[-=]*", r' from ', m) #replace arrow (<-) with from
     m = re.sub(r"[^a-zA-Z0-9$:-]", r' ', m) # Delete invalid characters
-    # If the colon is not surrounded by numbers, its not a time
+    # If the colon is not squaresurrounded by numbers, its not a time
     m = re.sub(r"([^0-9]+):", r'\1 ', m)
     m = re.sub(r":([^0-9]+)", r' \1', m)
     m = re.sub(r"--+", r' ', m)
@@ -57,8 +60,8 @@ def replace_symbols(message):
         # ([0-9])-[0-9:]+(am|pm) -> \1\2
     m = re.sub(r"m-[0-9]\S*", r'm', m)
     m = re.sub(r"([0-9])-[0-9:]+(am|pm)", r'\1\2', m)
-    # Drop stuff like 6ish
-    m = re.sub(r"(\d)ish", r"\1", m) 
+    # NOTE: Hunspell does very poorly with stuff like 6ish
+    m = re.sub(r"(\d)ish", r"\1", m)
     m = re.sub(r" +", r' ', m) # Delete extraneous white spaces
     return m.strip()
 
@@ -66,6 +69,7 @@ def drop_words(tokens):
     t = [token for token in tokens if not (token in stopset)]
     return t
 
+# Weigh more common words higher relative to other words
 def best_suggestion(suggestions):
     best = suggestions[0]
     score = 1
@@ -97,8 +101,8 @@ def clean_message(message, replacement):
 
 # Removes highway numbers
 # Removes hyphens for times
-# Removes references to 7/11
-# Removes spaces between number and am/pm
+# Removes references to 7/11 (screws up a lot of current time & date detection)
+# Removes spaces between number and am/pm (helps with time detection)
 def process_extra(tokens):
     t = tokens
     t = [token for token in t if not re.match(r'(400|401|403|404|407)', token)]

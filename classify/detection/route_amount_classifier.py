@@ -38,17 +38,3 @@ def train_model():
     rf_model = rf.fit(X_count_feat,Y)
     X = word_vect.fit(data["stage_3"])
     return rf_model, X
-
-# count_vect = CountVectorizer(analyzer = analyzer)
-
-# X_count = count_vect.fit(posts_tr_routes["message"])
-# Y = posts_tr_routes["number_of_routes"]
-
-# def route_classifier(message):
-    # message_turn_vect = X_count.transform([message])
-    # length = len(message)
-    # caps = num_of_caps(message)
-    # X_feat = numpy.append(message_turn_vect, length, caps)
-    # rf = RandomForestClassifier(n_estimators = 60, max_depth = 10, n_jobs=-1)
-    # rf_model = rf.fit(X_feat,Y)
-    # return rf_model.predict(X_feat)

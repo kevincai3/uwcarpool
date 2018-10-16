@@ -1,5 +1,6 @@
 from pygtrie import StringTrie
 
+# Contains common abbreviation we want to replace with location information.
 base = {
     'sauga': 'mississauga',
     'loo': 'waterloo',
@@ -53,6 +54,7 @@ for k, v in base.items():
 
 mapping = {k: v.split(' ') for k, v in base.items()}
 
+# Takes in an array of tokens, and returns a new array with the abbriveations replaced.
 def replace_tokens(tokens):
     results = []
     partial_path = ''

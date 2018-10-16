@@ -1,8 +1,8 @@
 import pandas as pd
 list_of_cities = pd.read_csv("detection/frequent_cities.csv",  sep = ",",  encoding='latin-1')["name"]
 
-#route detection general
-#pivots off the words "to" and "from"
+# route detection general
+# pivots off the words "to" and "from"
 def route_detection_1(tockenized_message):
     list_of_start = []
     list_of_end = []
@@ -41,7 +41,7 @@ def route_detection_1(tockenized_message):
         all_cities = [x for x in tockenized_message if x in list_of_cities.values]
         num_of_cities = len(all_cities)
         if(num_of_cities > 1):
-            #location1...locations (2 or more locations)            
+            #location1...locations (2 or more locations)
             list_of_start = all_cities[:1]
             list_of_end = all_cities[1:]
         if(num_of_cities == 1):
@@ -62,23 +62,23 @@ def route_detection_1(tockenized_message):
 
     return list(set(list_of_start)), list(set(list_of_end))
 
-#route detection Waterloo
-#pivots off the words "waterloo", "to" and "from"
-#if we have to choose whether waterloo is a start or destination and we have no other information,
-#we choose start
+# route detection Waterloo
+# pivots off the words "waterloo", "to" and "from"
+# if we have to choose whether waterloo is a start or destination and we have no other information,
+# we choose start
 def route_detection_2(tockenized_message):
     list_of_start = []
     list_of_end = []
     #removing consecutive duplicates (since the appearance of consecutive cities can cause problems)
     #removing all other consecutive duplicates does not cause any problems
     tockenized_message = [v for i, v in enumerate(tockenized_message) if i == 0 or v != tockenized_message[i-1]]
-    
+
     #removing the phrase "door to door" if it appears as this may cause problems with the appearance of "to"
     n = len(tockenized_message)
     for i in range(1,n-2):
-        if (tockenized_message[i-1] == "door") & (tockenized_message[i] == "to") & (tockenized_message[i+1] == "door"):        
+        if (tockenized_message[i-1] == "door") & (tockenized_message[i] == "to") & (tockenized_message[i+1] == "door"):
             tockenized_message[i] = ""
-    
+
     if("waterloo" in tockenized_message):
         if("to" in tockenized_message):
             if("from" in tockenized_message):

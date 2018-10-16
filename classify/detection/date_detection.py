@@ -7,12 +7,6 @@ from utils.helper import match, indiceToToken, get_time_zone, datetuple_to_datet
 from pytz import utc
 import re
 
-# Values
-#  Days    : 5
-#  Special : 10
-#  Month   : 7
-#  Number  : 1
-
 # Absolutes
 DAYS = r'monday|tuesday|wednesday|thursday|friday|saturday|sunday|mon|tue|tues|wed|thur|thurs|fri|sat|sun'
 SPECIAL = r'tonight|tomorrow|today|afternoon|asap'
@@ -80,16 +74,15 @@ def tag_date(token, postdate):
 def parse_date(buffer, tokens, postdate, results):
     buffer_str = [tokens[i] for i in buffer]
     date = None
-    if True:
-        try:
-            date = parser.parse(
-                ' '.join(buffer_str),
-                default=postdate,
-                ignoretz=True,
-                fuzzy=True,
-            )
-        except:
-            pass
+    try:
+        date = parser.parse(
+            ' '.join(buffer_str),
+            default=postdate,
+            ignoretz=True,
+            fuzzy=True,
+        )
+    except:
+        pass
     if date != None:
         results.append((buffer, date))
 
@@ -101,6 +94,7 @@ def find_dates(tokens, postdate):
     all_dates = detect(tokens, postdate, TOLERANCE, tag_date, valid_state, parse_date)
     return process_dates(all_dates, tokens, postdate)
 
+# Pick the most common date.
 def process_dates(results, tokens, postdate):
     debug(results)
     dates = remove_invalid(results, postdate)
@@ -113,6 +107,7 @@ def process_dates(results, tokens, postdate):
     most_common = counter.most_common(1)[0][0]
     return datetuple_to_datetime(most_common), [(date, d[date]) for date, count in counter.most_common()]
 
+# Remove dates that are too far from the postdate
 def remove_invalid(results, postdate):
     min_date = postdate - timedelta(days=1)
     max_date = postdate + timedelta(days=7)

@@ -12,6 +12,7 @@ def posts_lastweek(posts):
         i += 1
     return posts[posts_recent]
 
+#TODO: This is not enabled
 def duplicate_detection(new_posts, old_posts):
     all_posts = new_posts.append(old_posts)[["id", "message"]]
     all_posts =  all_posts[all_posts.duplicated(subset = "message",  keep = False)]

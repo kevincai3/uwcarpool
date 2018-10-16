@@ -12,27 +12,26 @@ dos_model, dos_vectorizer = train_model()
 UPDATE_STATEMENT = generateUpsertSQL('estimate_posts', 'post_id', ['post_id', 'post_type', 'best_date', 'all_date', 'best_time', 'all_time', 'from_loc', 'to_loc'])
 
 def update_estimate_posts(new_derived_posts):
-
-    locs = new_derived_posts.apply(lambda x:
-                                   route_detection_2(x["stage_3"].split(',')), axis = 1)
+    locs = new_derived_posts.apply(
+        lambda x: route_detection_2(x["stage_3"].split(',')), axis = 1)
 
     from_locs = [','.join(x[0]) for x in locs]
     to_locs = [','.join(x[1]) for x in locs]
 
     print('done routes')
-    dates = new_derived_posts.apply(lambda x:
-                                    find_dates(x["stage_3"].split(','), x["posttime"]), axis = 1)
+    dates = new_derived_posts.apply(
+        lambda x: find_dates(x["stage_3"].split(','), x["posttime"]), axis = 1)
     best_dates = [x[0] for x in dates]
     all_dates = [x[1] for x in dates]
 
-    times = new_derived_posts.apply(lambda x:
-                                    find_times(x["stage_3"].split(','), x["posttime"]), axis = 1)
+    times = new_derived_posts.apply(
+        lambda x: find_times(x["stage_3"].split(','), x["posttime"]), axis = 1)
     best_times = [x[0] for x in times]
     all_times = [x[1] for x in times]
 
     print('done time/date')
-    posts_type = new_derived_posts.apply(lambda x:
-                                         predict(dos_model, dos_vectorizer, x["stage_3"]), axis = 1)
+    posts_type = new_derived_posts.apply(
+        lambda x: predict(dos_model, dos_vectorizer, x["stage_3"]), axis = 1)
 
     print('done post_type')
     new_estimate_posts = pd.DataFrame({
@@ -50,7 +49,9 @@ def update_estimate_posts(new_derived_posts):
         "time": "object",
     })
 
-    values = [(post_id, post_type, pandas_nat_to_none(best_date), format_all_date(all_dates), pandas_nat_to_none(best_time), format_all_time(all_times), from_locs, to_locs)
+    values = [(post_id, post_type, pandas_nat_to_none(best_date),
+               format_all_date(all_dates), pandas_nat_to_none(best_time),
+               format_all_time(all_times), from_locs, to_locs)
               for post_id, post_type, best_date, all_dates, best_time, all_times, from_locs, to_locs
               in new_estimate_posts[['post_id', 'post_type', 'date', 'all_dates', 'time', 'all_times', 'from_loc', 'to_loc']].values]
 

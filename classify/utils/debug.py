@@ -16,6 +16,3 @@ def debug(*x):
     if DEBUG:
         calling_frame = inspect.stack()[1]
         print(f"{CBEGIN}{trimcwd(calling_frame.filename)}:{calling_frame.lineno}{CEND}", *x)
-
-if __name__ == "__main__":
-    debug("hi")

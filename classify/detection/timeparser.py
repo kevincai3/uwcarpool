@@ -10,8 +10,6 @@ AMBIGIOUS = r'(10|15|20)'
 MINUTE = r'([012345][05])(?:am|pm)?'
 BOTH = f'{HOUR}:?{MINUTE}?'
 
-# Private
-
 word_to_int = {
     'one': 1,
     'two': 2,
