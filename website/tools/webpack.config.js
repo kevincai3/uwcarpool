@@ -233,12 +233,6 @@ const config = {
         loader: 'raw-loader',
       },
 
-      // Convert Markdown into HTML
-      {
-        test: /\.md$/,
-        loader: path.resolve(__dirname, './lib/markdown-loader.js'),
-      },
-
       // Return public URL for all assets unless explicitly excluded
       // DO NOT FORGET to update `exclude` list when you adding a new loader
       {

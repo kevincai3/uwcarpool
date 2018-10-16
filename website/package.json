@@ -45,7 +45,6 @@
     "react-autocomplete": "^1.8.1",
     "react-datepicker": "1.5.0",
     "react-dom": "^16.4.1",
-    "react-slick": "^0.23.1",
     "react-spring": "^5.9.2",
     "sequelize": "^4.37.10",
     "serialize-javascript": "^1.5.0",

@@ -4,7 +4,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 import s from './Layout.css';
 import Header from '../Header/Header.js';
-import Footer from '../Footer';
+import Footer from '../Footer/Footer.js';
 import Base from '../Base/Base.js';
 
 class Layout extends React.PureComponent {

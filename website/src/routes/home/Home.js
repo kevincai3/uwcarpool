@@ -3,13 +3,11 @@ import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import classNames from 'classnames';
 import s from './Home.css';
-import Slide from 'react-slick';
 
 import history from '../../history.js'
 import Base from '../../components/Base/Base.js'
 import Header from '../../components/Header/Header.js';
-import Link from '../../components/Link';
-import phrases from './phrases.js';
+import Link from '../../components/Link/Link.js';
 
 class Home extends React.PureComponent {
   constructor(props) {
@@ -44,13 +42,6 @@ class Home extends React.PureComponent {
       swipe: false,
       touchMove: false,
     }
-    const destination = (
-      <span className={s.destination}>
-        <Slide {...sliderSettings}>
-          { phrases.map((phrase) => <span className={s.phrase} key={phrase}>{phrase}</span>) }
-        </Slide>
-      </span>
-    )
     return (
       <Base>
         <div className={s.root}>
@@ -58,9 +49,6 @@ class Home extends React.PureComponent {
           <div className={s.image} />
           <div className={s.text}>
             <span>Find your next Waterloo carpool!</span>
-            {/*
-            <span>Ride from Waterloo to </span>{destination}
-            */}
           </div>
           <form className={s.input_form} onSubmit={this.search}>
             <input type="text" className={classNames("searchbar", s.searchbar)} placeholder={placeholderText} value={query} onChange={this.updateQuery} />
