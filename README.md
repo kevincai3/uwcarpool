@@ -2,7 +2,7 @@
 
 ## What is it?
 
-UW Carpool is a simple search engine to help people find carpools in the various Facebook ride sharing groups in the Waterloo, Ontario, Canada area.  Historically, it's very tedious to find carpools in Facebook groups since it involves manually scrolling through all the posts in the group. UW Carpool parses and classifies the posts ahead of time to allow better searching. [See it live here](uwcarpool.com).
+UW Carpool is a simple search engine to help people find carpools in the various Facebook ride sharing groups in the Waterloo, Ontario, Canada area.  Historically, it's very tedious to find carpools in Facebook groups since it involves manually scrolling through all the posts in the group. UW Carpool parses and classifies the posts ahead of time to allow better searching. [See it live here](https://uwcarpool.com).
 
 
 
