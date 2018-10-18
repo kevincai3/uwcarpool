@@ -1,5 +1,6 @@
 import express from 'express';
 import logDb from '../data/db/logdb.js';
+import { env }  from '../config.js';
 import { COOKIE_NAME } from '../logger.js';
 
 const router = express.Router();
@@ -52,4 +53,5 @@ router.post('/reportpost', (req, res) => {
     .catch(err => console.error(err));
 })
 
-export default router;
+// TODO: Better way of gating logging during staging
+export default (env === 'staging') ? express.Router() : router;
