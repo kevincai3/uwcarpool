@@ -190,8 +190,9 @@ app.use((err, req, res, next) => {
 //const promise = models.sync().catch(err => console.error(err.stack));
 if (!module.hot) {
   //promise.then(() => {
-    app.listen(config.port, 'localhost', () => {
-      console.info(`The server is running at http://localhost:${config.port}/`);
+    const host = config.env === 'staging' ? '0.0.0.0' : 'localhost'
+    app.listen(config.port, host, () => {
+      console.info(`The server is running at http://${host}:${config.port}/`);
     });
   //});
 }
