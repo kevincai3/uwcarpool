@@ -83,7 +83,7 @@ class Search extends React.PureComponent {
   }
 
   render() {
-    const placeholderText = "i.e. Waterloo to Toronto Tomorrow";
+    const placeholderText = "Serach here...";
     const { query, searchBar, options, order } = this.state;
     return (
       <div className={s.container}>

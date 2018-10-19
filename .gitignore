@@ -12,5 +12,5 @@ __pycache__
 build/
 __snapshots__
 
-src/config.js
+website/src/config.js
 config.py

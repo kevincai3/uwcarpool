@@ -2,7 +2,7 @@ from pytz import utc
 from flask import Flask, request, jsonify
 import traceback
 
-from classify_search import classify_message
+from explore import classify_message
 from update_tables.update_tables import update_tables
 
 app = Flask(__name__)

@@ -21,7 +21,7 @@
   position: relative;
   top: 30vh;
   margin: 0 auto;
-  padding: 0 0 60px;
+  padding: 0 5px 60px 5px;
   max-width: var(--max-content-width);
   font-family: var(--font-family-header);
   font-size: 3.5rem;
@@ -48,6 +48,7 @@
   border: 2px solid var(--color-white-blue);
   color: var(--color-white-blue);
   min-height: 3rem;
+  margin-right: 10px;
 }
 
 .destination {
@@ -59,6 +60,16 @@
   outline: none;
 }
 
+.explore_button {
+  background-color: var(--color-ice-blue);
+}
+
+@media (hover:hover), (-moz-touch-enabled: 0) {
+  .explore_button:hover {
+    background-color: #bcdafb;
+  }
+}
+
 @media (max-width: 500px) {
   .text {
     font-size: 2.5rem;
@@ -67,5 +78,21 @@
 
   .input_form {
     top: 20vh;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .input_form > * {
+  }
+
+  .searchbar {
+    flex: 1 0 auto;
+    margin: 0;
+    margin-bottom: 15px;
+  }
+
+  .button, .explore_button {
+    min-height: 2.5rem;
+    padding: 0 1rem;
   }
 }

@@ -53,6 +53,7 @@ class Home extends React.PureComponent {
           <form className={s.input_form} onSubmit={this.search}>
             <input type="text" className={classNames("searchbar", s.searchbar)} placeholder={placeholderText} value={query} onChange={this.updateQuery} />
             <input className={classNames("button", s.button)} type="submit" value="Search" />
+            <button className={classNames("button", s.explore_button)}>Explore</button>
           </form>
         </div>
       </Base>

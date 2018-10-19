@@ -23,6 +23,11 @@ const params = {
   },
   resolve({ request }, params) {
     const { strQuery } = params;
+    if (strQuery == '') {
+      return {
+        id: md5(strQuery),
+      }
+    }
     logRequest(request.cookies[COOKIE_NAME], 3, params);
     return fetchQuery(strQuery)
       .then(results => processParam(strQuery, results));
