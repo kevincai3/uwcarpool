@@ -16,7 +16,7 @@ function buildPost(rawPosts) {
     postLink: post.fbid,
     name: post.source,
   })),
-    group => group.source
+    group => group.name
   );
   return {
     id: newestPost.trip_id + "-" + newestPost.posttime.toUTCString(),
