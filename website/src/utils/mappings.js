@@ -45,7 +45,7 @@ function paramsToPosition(params) {
     type: [0],
     fromLoc: [0],
     toLoc: [0],
-    date: moment(),
+    date: null,
     time: [0],
     groups: []
   }
