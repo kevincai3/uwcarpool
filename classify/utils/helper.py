@@ -70,6 +70,7 @@ def pandas_nat_to_none(value):
         return None
     else:
         return value
+    
 #source: https://gist.github.com/jlln/338b4b0b55bd6984f883
 def split_data_frame_list(df, target_column, output_type=int):
     row_accumulator = []
